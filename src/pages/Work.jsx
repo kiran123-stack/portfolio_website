@@ -1,9 +1,139 @@
-import React from 'react'
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
 
 const Work = () => {
-  return (
-    <div>Work</div>
-  )
-}
+  const workRef = useRef(null);
 
-export default Work
+  // --- PROJECT DATA FROM YOUR DETAILS ---
+  const projects = [
+    {
+      id: 1,
+      title: "Cinesphere - Netflix Landing Page Clone",
+      description: "A responsive recreation of the Netflix landing page, built with semantic HTML5 and modern CSS. This modified version replicates the complex multi-section layout, sign-up flow, and dynamic FAQ section.",
+      technologies: "HTML5, CSS3, Flexbox/Grid",
+      // I used a placeholder image with the text "Netflix Clone"
+      image: "/movie.jpg", 
+      liveLink: "https://cine-sphere-one.vercel.app/",
+      githubLink: "https://github.com/kiran123-stack/movieX"
+    },
+    {
+      id: 2,
+      title: "cosmic-landing-page",
+      description: "A product-focused landing page with smooth CSS animations and a clear call-to-action. Implemented with CSS Flexbox/Grid for a pixel-perfect layout on all devices.",
+      technologies: "HTML5, CSS3 (Flex/Grid), Animations",
+      image: "/cosmic.jpg",
+      liveLink: "https://self-made-project.vercel.app/",
+      githubLink: "https://github.com/kiran123-stack/self-made-project"
+    },
+    
+      {
+      id: 3,
+      title: "Dhinchak Restaurant Website",
+      description: "A visually stunning and responsive restaurant website featuring a dynamic menu gallery, online table reservation system, and customer reviews section. Designed with a focus on user experience and appetizing aesthetics.",
+      technologies: "React, Tailwind CSS, Framer Motion",
+      image: "/rest.jpg", // Orange theme
+      liveLink: null, // No live demo
+      githubLink: "https://github.com/kiran123-stack/Resturant_app"
+    },
+    
+    {
+      id: 4,
+      title: "Portfolio Website",
+      description: "A dynamic, responsive portfolio website featuring a highly engaging user experience. Utilizes Swiper.js for navigation and custom CSS animations for a polished, professional aesthetic.",
+      technologies: "HTML, JavaScript, CSS",
+      image: "/port.jpg",
+      liveLink: "https://portfolio-ashy-eight-82.vercel.app/",
+      githubLink: "https://github.com/kiran123-stack/portfolio"
+    }
+  ];
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".project-card",
+        { y: 150, opacity: 0, rotation: 10, scale: 0.8, transformOrigin: "bottom left" },
+        {
+          y: 0,
+          opacity: 1,
+          rotation: 0,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.25,
+          ease: "power3.out",
+        }
+      );
+    }, workRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={workRef} className="min-h-screen py-24 px-6 md:px-12 bg-slate-900 overflow-hidden">
+      <h2 className="text-4xl font-bold mb-16 text-center text-white uppercase tracking-widest border-b-4 border-blue-600 inline-block mx-auto">
+        WORK
+      </h2>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto perspective-1000">
+        {projects.map((project) => (
+          <div 
+            key={project.id} 
+            className="project-card bg-slate-800 border border-slate-700 rounded-2xl shadow-xl overflow-hidden 
+                       hover:-translate-y-4 hover:rotate-1 
+                       hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:border-blue-500
+                       transition-all duration-300 ease-out flex flex-col group"
+          >
+            
+            {/* Image Area */}
+            <div className="h-48 overflow-hidden relative bg-slate-700">
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+              />
+              
+              {/* Overlay with Tech Stack */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4 text-center">
+                <span className="text-blue-400 font-bold mb-2 text-sm uppercase tracking-wider">Tech Stack</span>
+                <p className="text-xs font-medium">{project.technologies}</p>
+              </div>
+            </div>
+
+            {/* Content Area */}
+            <div className="p-6 flex-1 flex flex-col">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors line-clamp-1">
+                {project.title}
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                {project.description}
+              </p>
+              
+              <div className="flex gap-4 mt-auto border-t border-slate-700 pt-4">
+                {project.liveLink && (
+                  <a 
+                    href={project.liveLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+                  >
+                     <FaExternalLinkAlt /> Live Demo
+                  </a>
+                )}
+                
+                <a 
+                  href={project.githubLink}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white hover:underline transition-colors"
+                >
+                   <FaGithub /> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Work;
