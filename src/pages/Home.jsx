@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import image from "../assets/profile.jpg";
+import About from "./About";
+import Work from "./work"; 
+import Contact from "./Contact";
 
 const Home = () => {
   const heroRef = useRef(null);
@@ -26,6 +29,7 @@ const Home = () => {
   }, []);
 
   return (
+    <div>
     <section
       ref={heroRef}
       className="min-h-[90vh] flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 py-10 bg-gray-900"
@@ -65,6 +69,10 @@ const Home = () => {
         </div>
       </div>
     </section>
+       <About />
+      <Work />
+      <Contact />
+      </div>
   );
 };
 
