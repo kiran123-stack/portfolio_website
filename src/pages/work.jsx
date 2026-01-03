@@ -22,7 +22,7 @@ const Work = () => {
       title: "oggy-landing-page",
       description: "A fun learning focused landing page with smooth CSS animations and a clear call-to-action. Implemented with advance CSS Flexbox/Grid for a pixel-perfect layout on all devices.",
       technologies: "HTML5, CSS3 (Flex/Grid), Animations",
-      image: "/cosmic.jpg",
+      image: "/oggy.webp",
       liveLink: "https://oggy-nu.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/oggy"
     },
