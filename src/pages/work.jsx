@@ -19,12 +19,12 @@ const Work = () => {
     },
     {
       id: 2,
-      title: "cosmic-landing-page",
-      description: "A product-focused landing page with smooth CSS animations and a clear call-to-action. Implemented with CSS Flexbox/Grid for a pixel-perfect layout on all devices.",
+      title: "oggy-landing-page",
+      description: "A fun learning focused landing page with smooth CSS animations and a clear call-to-action. Implemented with advance CSS Flexbox/Grid for a pixel-perfect layout on all devices.",
       technologies: "HTML5, CSS3 (Flex/Grid), Animations",
       image: "/cosmic.jpg",
-      liveLink: "https://self-made-project.vercel.app/",
-      githubLink: "https://github.com/kiran123-stack/self-made-project"
+      liveLink: "https://oggy-nu.vercel.app/",
+      githubLink: "https://github.com/kiran123-stack/oggy"
     },
     
       {
