@@ -4,7 +4,7 @@ A modern, responsive personal portfolio website built to showcase my skills, pro
 
 ## 🚀 Live Demo
 
-[View Live Portfolio](https://portfolio-ashy-eight-82.vercel.app/)
+[View Live Portfolio](https://portfolio-website-ten-weld-97.vercel.app/)
 
 ## ✨ Features
 
