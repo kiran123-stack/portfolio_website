@@ -9,7 +9,7 @@ const Work = () => {
   const projects = [
     {
       id: 1,
-      title: "Cinesphere - Netflix Landing Page Clone",
+      title: "Cinesphere - Netflix Inspired Landing Page Clone",
       description: "A responsive recreation of the Netflix landing page, built with semantic HTML5 and modern CSS. This modified version replicates the complex multi-section layout, sign-up flow, and dynamic FAQ section.",
       technologies: "HTML5, CSS3, Flexbox/Grid",
       // I used a placeholder image with the text "Netflix Clone"
