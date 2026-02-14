@@ -12,7 +12,7 @@ const Work = () => {
       title: "Cinesphere - Netflix Inspired Landing Page Clone",
       description: "A responsive recreation of the Netflix landing page, built with semantic HTML5 and modern CSS. This modified version replicates the complex multi-section layout, sign-up flow, and dynamic FAQ section.",
       technologies: "HTML5, CSS3, Flexbox/Grid",
-      // I used a placeholder image with the text "Netflix Clone"
+     
       image: "/movie.jpg", 
       liveLink: "https://cine-sphere-one.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/movieX"
@@ -29,12 +29,13 @@ const Work = () => {
     
       {
       id: 3,
-      title: "Dhinchak Restaurant Website",
-      description: "A visually stunning and responsive restaurant website featuring a dynamic menu gallery, online table reservation system, and customer reviews section. Designed with a focus on user experience and appetizing aesthetics.",
-      technologies: "React, Tailwind CSS, Framer Motion",
-      image: "/rest.jpg", // Orange theme
-      liveLink: null, // No live demo
-      githubLink: "https://github.com/kiran123-stack/Resturant_app"
+
+      title: "MindPulse - AI-Powered Behavioral Analytics",
+      description: "A cutting-edge, full-stack AI system designed to analyze a user's mental state and cognitive load through digital interaction patterns. Unlike traditional chatbots, MindPulse monitors 'digital cues'—such as typing latency, backspace frequency, and idle time—to provide a deeper, context-aware conversational experience. The system leverages Google Gemini 2.5 to interpret these behavioral signals in real-time, delivering empathetic and adaptive responses.",
+      technologies: "Next.js 16, TypeScript, Node.js, Express, MongoDB, Google Gemini API, Tailwind CSS v4",
+      image: "/mindpulse-analytics.jpg", 
+      liveLink: " https://mind-pluse.vercel.app/", 
+      githubLink: "https://github.com/kiran123-stack/MindPluse"
     },
     
     {
