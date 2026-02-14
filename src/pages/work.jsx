@@ -43,7 +43,7 @@ const Work = () => {
       title: "Natours AI – Intelligent Travel Planner",
       description: "A full-stack AI-powered travel application that generates personalized itineraries using Google Gemini. Features a cinematic UI, real-time text-to-speech audio guides, secure authentication, and dynamic image generation.",
       technologies: "Next.js, TypeScript, Node.js, Express, MongoDB, Gemini AI",
-      image: "/port.jpg", 
+      image: "/air.webp", 
       liveLink: "https://natours-ai.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/natours-ai"
     }
