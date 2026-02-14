@@ -32,7 +32,7 @@ const Work = () => {
 
       title: "MindPulse - AI-Powered Behavioral Analytics",
       description: "A cutting-edge, full-stack AI system designed to analyze a user's mental state and cognitive load through digital interaction patterns. Unlike traditional chatbots, MindPulse monitors 'digital cues'—such as typing latency, backspace frequency, and idle time—to provide a deeper, context-aware conversational experience. The system leverages Google Gemini 2.5 to interpret these behavioral signals in real-time, delivering empathetic and adaptive responses.",
-      technologies: "Next.js 16, TypeScript, Node.js, Express, MongoDB, Google Gemini API, Tailwind CSS v4",
+      technologies: "Next.js 16, TypeScript, Node.js, Express, MongoDB, Groq API, Tailwind CSS v4",
       image: "/ICO.webp", 
       liveLink: " https://mind-pluse.vercel.app/", 
       githubLink: "https://github.com/kiran123-stack/MindPluse"
