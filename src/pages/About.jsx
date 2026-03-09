@@ -3,8 +3,19 @@ import gsap from "gsap";
 import { Link } from 'react-router-dom';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReact, faJsSquare, faHtml5, faCss3Alt, faNodeJs, faGithub, faGitAlt } from '@fortawesome/free-brands-svg-icons'; 
-import { faGraduationCap, faSchool, faUniversity } from '@fortawesome/free-solid-svg-icons'; // Added icons for education
+
+// Brands Icons
+import { 
+  faReact, 
+  faJsSquare, 
+  faHtml5, 
+  faCss3Alt, 
+  faNodeJs, 
+  faGithub, 
+  faGitAlt 
+} from '@fortawesome/free-brands-svg-icons'; 
+
+// Solid Icons (Merged into one clean block)
 import { 
   faGraduationCap, 
   faSchool, 
@@ -14,7 +25,7 @@ import {
   faDatabase,  // For MongoDB
   faServer,    // For Express
   faBolt,      // For GSAP
-  faN          // For Next.js (Note: 'faN' is a simple 'N' icon)
+  faN          // For Next.js
 } from '@fortawesome/free-solid-svg-icons';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,6 +42,7 @@ const About = () => {
     const fadeUps = [aboutRef, educationRef, skillsRef, contactRef];
 
     fadeUps.forEach((ref) => {
+      if (!ref.current) return;
       gsap.fromTo(
         ref.current,
         { opacity: 0, y: 50 },
@@ -85,7 +97,7 @@ const About = () => {
         <h2 className="text-4xl font-bold mb-8 uppercase tracking-widest text-blue-500">About ME</h2>
         <div className="space-y-4 max-w-3xl mx-auto text-lg mb-10 text-slate-300 leading-relaxed">
           <p>
-            I am a passionate developer aiming for top tech companies. I specialize in building 
+            I am a passionate developer specializing in building 
             clean, responsive web applications with modern technologies. My focus is on writing 
             efficient code and designing intuitive user interfaces.
           </p>
@@ -106,49 +118,45 @@ const About = () => {
         </div>
       </section>
 
-      {/* ================= EDUCATION SECTION (NEW) ================= */}
+      {/* ================= EDUCATION SECTION ================= */}
       <section ref={educationRef} className="py-20 px-6 md:px-32 bg-slate-900 text-white border-b border-slate-800">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center border-b-2 border-blue-500 inline-block pb-2 tracking-wide mx-auto table">
-             EDUCATION
+          <h2 className="text-3xl font-bold mb-12 text-center border-b-2 border-blue-500 inline-block pb-2 tracking-wide mx-auto table uppercase">
+              EDUCATION
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Degree Card 1: BCA */}
             <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-2 group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:bg-blue-500/20 transition-all">
                   <FontAwesomeIcon icon={faUniversity} size="lg" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Bachelor of Computer Applications (BCA)</h3>
+                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">BCA</h3>
                   <p className="text-slate-400 text-sm">IGNOU</p>
                 </div>
               </div>
               <p className="text-blue-400 font-semibold mb-3 text-sm">Current Student</p>
               <p className="text-slate-300 leading-relaxed text-sm">
-                Currently pursuing my BCA, building a strong foundation in computer science principles while specializing in modern <strong className="text-white">Web Development</strong> technologies.
+                Building a strong foundation in computer science while specializing in modern <strong className="text-white">Web Development</strong>.
               </p>
             </div>
 
-            {/* Degree Card 2: Schooling */}
             <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-2 group">
               <div className="flex items-center gap-4 mb-4">
                  <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 group-hover:text-green-300 group-hover:bg-green-500/20 transition-all">
                   <FontAwesomeIcon icon={faSchool} size="lg" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">Higher Secondary Education</h3>
+                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">High School</h3>
                   <p className="text-slate-400 text-sm">Dhruva Public School</p>
                 </div>
               </div>
               <p className="text-green-400 font-semibold mb-3 text-sm">Completed: 2024</p>
               <p className="text-slate-300 leading-relaxed text-sm">
-                Completed my schooling with a <strong className="text-white">Science Stream</strong> focus, achieving <strong className="text-white">79%</strong>. This background provided a strong analytical and problem-solving mindset crucial for coding.
+                Focused on <strong className="text-white">Science Stream</strong> with <strong className="text-white">79%</strong>, developing a strong analytical mindset.
               </p>
             </div>
-
           </div>
         </div>
       </section>
@@ -162,17 +170,17 @@ const About = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-             { name: 'Next.js', icon: faN, color: 'text-white' },
-        { name: 'React', icon: faReact, color: 'text-cyan-400' },
-        { name: 'TypeScript', icon: faCode, color: 'text-blue-400' },
-        { name: 'JavaScript', icon: faJsSquare, color: 'text-yellow-400' },
-        { name: 'Tailwind CSS', icon: faWind, color: 'text-cyan-300' },
-        { name: 'Node.js', icon: faNodeJs, color: 'text-green-500' },
-        { name: 'MongoDB', icon: faDatabase, color: 'text-green-400' },
-        { name: 'Express', icon: faServer, color: 'text-gray-400' },
-        { name: 'GSAP', icon: faBolt, color: 'text-green-300' },
-        { name: 'GitHub', icon: faGithub, color: 'text-white' },
-        { name: 'Git', icon: faGitAlt, color: 'text-red-500' },
+              { name: 'Next.js', icon: faN, color: 'text-white' },
+              { name: 'React', icon: faReact, color: 'text-cyan-400' },
+              { name: 'TypeScript', icon: faCode, color: 'text-blue-400' },
+              { name: 'JavaScript', icon: faJsSquare, color: 'text-yellow-400' },
+              { name: 'Tailwind', icon: faWind, color: 'text-cyan-300' },
+              { name: 'Node.js', icon: faNodeJs, color: 'text-green-500' },
+              { name: 'MongoDB', icon: faDatabase, color: 'text-green-400' },
+              { name: 'Express', icon: faServer, color: 'text-gray-400' },
+              { name: 'GSAP', icon: faBolt, color: 'text-green-300' },
+              { name: 'GitHub', icon: faGithub, color: 'text-white' },
+              { name: 'Git', icon: faGitAlt, color: 'text-red-500' },
             ].map((skill, index) => (
               <div
                 key={index}
@@ -190,7 +198,6 @@ const About = () => {
                 <span className="text-xl font-semibold text-slate-300 group-hover:text-white tracking-wide">
                   {skill.name}
                 </span>
-                <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             ))}
           </div>
@@ -201,7 +208,7 @@ const About = () => {
       <section ref={contactRef} className="py-24 bg-slate-900 text-center text-white border-t border-slate-800">
         <h2 className="text-4xl font-bold mb-8">Get in Touch</h2>
         <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-          Feel free to reach out if you have any questions, want to collaborate on a project, or just want to say hi!
+          Feel free to reach out if you want to collaborate on a project or just say hi!
         </p>
         <Link 
             to="/contact" 
