@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaVideo } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaVideo, FaPlay } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
   const workRef = useRef(null);
+  const [activeDemo, setActiveDemo] = useState(null);
 
   const flagshipProjects = [
     {
@@ -19,6 +20,7 @@ const Work = () => {
       tech: ["Next.js 16", "Grok", "AES-256", "GSAP", "Lenis"],
       image: "/images.jfif",
       adVideo: "/ad_mindpulse.mp4",
+      demoVideo: "/demo_mindpuls.mp4", // Added Demo Video
       liveLink: "https://mind-pluse.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/MindPluse"
     },
@@ -32,6 +34,7 @@ const Work = () => {
       tech: ["Next.js", "Node.js", "Gemini AI", "Tailwind v4", "Gsap"],
       image: "/air.webp",
       adVideo: "/ai_natour.mp4",
+      demoVideo: "/demo_nator.mp4", // Added Demo Video
       liveLink: "https://natours-ai.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/natours-ai"
     }
@@ -58,7 +61,6 @@ const Work = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Flagship Card Entrance Animation
       gsap.from(".flagship-card", {
         scrollTrigger: {
           trigger: ".flagship-container",
@@ -92,7 +94,7 @@ const Work = () => {
             <div key={p.id} className="flagship-card grid lg:grid-cols-12 gap-16 items-center">
               
               {/* Left Side: Dynamic Visuals */}
-              <div className={`lg:col-span-7 space-y-8 ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
+              <div className={`lg:col-span-7 space-y-6 ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
                 {/* Main Ad Video - Autoplays */}
                 <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-900/10">
                   <video 
@@ -105,20 +107,25 @@ const Work = () => {
                   />
                   <div className="absolute top-6 left-6 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
                     <FaVideo className="text-blue-500 text-xs animate-pulse" />
-                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">Product Ad</span>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">Featured Ad</span>
                   </div>
                 </div>
                 
-                {/* Secondary Visual: Full Color Image */}
+                {/* Demo Video Section */}
                 <div className="grid grid-cols-1 gap-4">
-                  <div className="group relative rounded-2xl overflow-hidden border border-slate-800 aspect-[21/9] shadow-xl">
-                    <img 
-                      src={p.image} 
-                      alt={`${p.title} Preview`} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  <div className="group relative rounded-2xl overflow-hidden border border-slate-800 aspect-video bg-slate-900">
+                    <video 
+                      src={p.demoVideo} 
+                      controls
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                       <span className="text-xs font-mono text-white/80 uppercase tracking-widest">Interface Preview</span>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:hidden">
+                       <div className="bg-blue-600 p-4 rounded-full shadow-lg">
+                          <FaPlay className="text-white translate-x-0.5" />
+                       </div>
+                    </div>
+                    <div className="absolute bottom-4 left-4 bg-black/40 px-3 py-1 rounded text-[10px] font-mono text-white/80 uppercase">
+                        Technical Walkthrough / Demo
                     </div>
                   </div>
                 </div>
@@ -134,22 +141,22 @@ const Work = () => {
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <FaInfoCircle className="text-blue-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1">THE PROBLEM</strong> {p.problem}</p>
+                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter">The Problem</strong> {p.problem}</p>
                   </div>
                   <div className="flex gap-4">
                     <FaShieldAlt className="text-red-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1">CHALLENGE</strong> {p.challenge}</p>
+                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter">Technical Challenge</strong> {p.challenge}</p>
                   </div>
                   <div className="flex gap-4">
                     <FaRocket className="text-green-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1">ENGINEERED SOLUTION</strong> {p.solution}</p>
+                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter">The Solution</strong> {p.solution}</p>
                   </div>
                 </div>
 
                 {/* Tech Chips */}
                 <div className="flex flex-wrap gap-2 pt-4">
                   {p.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-blue-500/5 border border-blue-500/20 rounded-md text-[10px] text-blue-300 font-bold tracking-tighter uppercase">
+                    <span key={t} className="px-3 py-1 bg-blue-500/5 border border-blue-500/20 rounded-md text-[10px] text-blue-300 font-bold uppercase tracking-tighter">
                       {t}
                     </span>
                   ))}
