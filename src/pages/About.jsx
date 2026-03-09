@@ -5,6 +5,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faJsSquare, faHtml5, faCss3Alt, faNodeJs, faGithub, faGitAlt } from '@fortawesome/free-brands-svg-icons'; 
 import { faGraduationCap, faSchool, faUniversity } from '@fortawesome/free-solid-svg-icons'; // Added icons for education
+import { 
+  faGraduationCap, 
+  faSchool, 
+  faUniversity, 
+  faCode,      // For TypeScript
+  faWind,      // For Tailwind
+  faDatabase,  // For MongoDB
+  faServer,    // For Express
+  faBolt,      // For GSAP
+  faN          // For Next.js (Note: 'faN' is a simple 'N' icon)
+} from '@fortawesome/free-solid-svg-icons';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,14 +162,17 @@ const About = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { name: 'React', icon: faReact, color: 'text-cyan-400' },
-              { name: 'JavaScript', icon: faJsSquare, color: 'text-yellow-400' },
-              { name: 'HTML5', icon: faHtml5, color: 'text-orange-500' },
-              { name: 'CSS3', icon: faCss3Alt, color: 'text-blue-500' },
-              { name: 'Node.js', icon: faNodeJs, color: 'text-green-500' },
-              { name: 'GitHub', icon: faGithub, color: 'text-white' },
-              { name: 'Git', icon: faGitAlt, color: 'text-red-500' },
-              { name: 'Tailwind', icon: faCss3Alt, color: 'text-cyan-300' }, 
+             { name: 'Next.js', icon: faN, color: 'text-white' },
+        { name: 'React', icon: faReact, color: 'text-cyan-400' },
+        { name: 'TypeScript', icon: faCode, color: 'text-blue-400' },
+        { name: 'JavaScript', icon: faJsSquare, color: 'text-yellow-400' },
+        { name: 'Tailwind CSS', icon: faWind, color: 'text-cyan-300' },
+        { name: 'Node.js', icon: faNodeJs, color: 'text-green-500' },
+        { name: 'MongoDB', icon: faDatabase, color: 'text-green-400' },
+        { name: 'Express', icon: faServer, color: 'text-gray-400' },
+        { name: 'GSAP', icon: faBolt, color: 'text-green-300' },
+        { name: 'GitHub', icon: faGithub, color: 'text-white' },
+        { name: 'Git', icon: faGitAlt, color: 'text-red-500' },
             ].map((skill, index) => (
               <div
                 key={index}
