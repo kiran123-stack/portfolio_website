@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaVideo, FaPlay } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaVideo, FaPlayCircle } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,10 +13,11 @@ const Work = () => {
       id: "mindpulse",
       title: "MindPulse",
       tagline: "Behavioral AI & Emotional Sanctuary",
-      problem: "Traditional chatbots are 'emotionally blind,' missing the user's physical state or cognitive fatigue.",
+      problem: "Traditional chatbots are 'emotionally blind,' missing the user's physical state or cognitive load.",
       challenge: "Developing a non-intrusive telemetry system to detect typing latency patterns without compromising privacy.",
       solution: "Engineered a behavioral analysis engine with AES-256 encryption. Integrated 'Hana' mascot for a safe conversational space.",
       tech: ["Next.js 16", "Grok", "AES-256", "GSAP", "Lenis"],
+      image: "/images.jfif",
       adVideo: "/ad_mindpulse.mp4",
       demoVideo: "/demo_mindpuls.mp4",
       liveLink: "https://mind-pluse.vercel.app/",
@@ -30,7 +31,8 @@ const Work = () => {
       challenge: "Orchestrating multiple AI agents to generate structured itineraries while maintaining visual immersion.",
       solution: "Built a 15-second research collapser that generates custom 3-day itineraries based on real-time budget data.",
       tech: ["Next.js", "Node.js", "Gemini AI", "Tailwind v4", "Gsap"],
-      adVideo: "/ai_natour.mp4",
+      image: "/air.webp",
+      adVideo: "/ai_natour.mp4", // Ad video as requested
       demoVideo: "/demo_nator.mp4",
       liveLink: "https://natours-ai.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/natours-ai"
@@ -69,6 +71,16 @@ const Work = () => {
         stagger: 0.3,
         ease: "power4.out"
       });
+
+      // Video Hover Playback Logic
+      gsap.utils.toArray(".video-container").forEach(container => {
+        const video = container.querySelector("video");
+        container.addEventListener("mouseenter", () => video.play());
+        container.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      });
     }, workRef);
     return () => ctx.revert();
   }, []);
@@ -77,67 +89,56 @@ const Work = () => {
     <section ref={workRef} className="min-h-screen py-32 px-6 bg-[#020617] text-slate-300 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
+        {/* Header Section */}
         <div className="mb-24 text-center md:text-left">
-          <h2 className="text-blue-500 font-mono tracking-widest text-sm uppercase mb-4 tracking-[0.3em]">Case Studies</h2>
+          <h2 className="text-blue-500 font-mono tracking-widest text-sm uppercase mb-4">Engineering Case Studies</h2>
           <h3 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
-            Where Code Meets <span className="text-blue-600 italic font-serif">Purpose.</span>
+            Where Code Meets <span className="text-blue-600 italic">Purpose.</span>
           </h3>
         </div>
 
-        {/* Flagship Case Studies */}
+        {/* Flagship Projects Section */}
         <div className="flagship-container space-y-48">
           {flagshipProjects.map((p, idx) => (
-            <div key={p.id} className="flagship-card grid lg:grid-cols-12 gap-16 items-start">
+            <div key={p.id} className="flagship-card grid lg:grid-cols-12 gap-12 items-start">
               
-              {/* Left Side: Dynamic Visuals */}
-              <div className={`lg:col-span-7 space-y-8 ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
+              {/* Visual Side (Left) */}
+              <div className={`lg:col-span-7 space-y-6 ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
                 
-                {/* 1. AD VIDEO (AUTOPLAY TEASER) */}
-                <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-500/5">
+                {/* Main Ad Video - Autoplays on Hover */}
+                <div className="video-container relative group rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-500/10">
                   <video 
                     src={p.adVideo} 
-                    autoPlay 
                     muted 
                     loop 
                     playsInline
-                    className="w-full h-full object-cover brightness-110"
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                   />
-                  <div className="absolute top-6 left-6 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                    <FaVideo className="text-blue-500 text-xs animate-pulse" />
-                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">Cinema Teaser</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-8 pointer-events-none">
+                    <span className="flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs">
+                      <FaVideo className="text-blue-500 text-xl animate-pulse" /> Hover to Preview Ad
+                    </span>
                   </div>
                 </div>
                 
-                {/* 2. DEMO VIDEO (FULL INTERFACE VIEW) */}
-                <div className="group relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 aspect-video shadow-inner">
-                  {/* Changed to object-contain to show the WHOLE video without cropping */}
-                  <video 
-                    src={p.demoVideo} 
-                    controls
-                    className="w-full h-full object-contain z-10 relative"
-                  />
-                  {/* Blurred background copy for an "Elite" pillar-box effect if the video is narrow */}
-                  <video 
-                    src={p.demoVideo} 
-                    muted 
-                    loop
-                    className="absolute inset-0 w-full h-full object-cover opacity-20 blur-2xl scale-110"
-                  />
-                  
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:hidden transition-all duration-500 z-20">
-                     <div className="bg-blue-600/90 p-5 rounded-full shadow-[0_0_30px_rgba(37,99,235,0.4)] backdrop-blur-sm">
-                        <FaPlay className="text-white text-xl translate-x-0.5" />
-                     </div>
+                {/* Secondary Visual: Portrait Demo & Color Image */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Portrait Demo Video - object-contain ensures no cropping */}
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-video flex items-center justify-center">
+                    <video 
+                      src={p.demoVideo} 
+                      controls 
+                      className="h-full w-full object-contain" 
+                    />
                   </div>
-                  
-                  <div className="absolute bottom-4 left-4 bg-blue-600 px-3 py-1 rounded-md text-[10px] font-bold text-white uppercase tracking-wider z-30">
-                      High-Def Demo
+                  {/* Vibrant Project Image */}
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-lg">
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
                   </div>
                 </div>
               </div>
 
-              {/* Right Side: Professional Content */}
+              {/* Content Side (Right) */}
               <div className={`lg:col-span-5 flex flex-col space-y-8 ${idx % 2 !== 0 ? 'lg:order-1' : ''}`}>
                 <div>
                   <h4 className="text-4xl font-bold text-white mb-2">{p.title}</h4>
@@ -145,34 +146,33 @@ const Work = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="flex gap-4 group/item">
-                    <FaInfoCircle className="text-blue-500 mt-1 shrink-0 group-hover/item:scale-110 transition-transform" />
+                  <div className="flex gap-4">
+                    <FaInfoCircle className="text-blue-500 mt-1 shrink-0" />
                     <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">The Problem</strong> {p.problem}</p>
                   </div>
-                  <div className="flex gap-4 group/item">
-                    <FaShieldAlt className="text-red-500 mt-1 shrink-0 group-hover/item:scale-110 transition-transform" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">Engineering Challenge</strong> {p.challenge}</p>
+                  <div className="flex gap-4">
+                    <FaShieldAlt className="text-red-500 mt-1 shrink-0" />
+                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">Technical Challenge</strong> {p.challenge}</p>
                   </div>
-                  <div className="flex gap-4 group/item">
-                    <FaRocket className="text-green-500 mt-1 shrink-0 group-hover/item:scale-110 transition-transform" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">The Solution</strong> {p.solution}</p>
+                  <div className="flex gap-4">
+                    <FaRocket className="text-green-500 mt-1 shrink-0" />
+                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">Engineered Solution</strong> {p.solution}</p>
                   </div>
                 </div>
 
-                {/* Tech Chips */}
                 <div className="flex flex-wrap gap-2 pt-4">
                   {p.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-blue-500/10 border border-blue-400/20 rounded-lg text-[10px] text-blue-300 font-bold uppercase tracking-tight">
+                    <span key={t} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] text-blue-300 font-bold uppercase tracking-tight">
                       {t}
                     </span>
                   ))}
                 </div>
 
                 <div className="flex gap-8 pt-6">
-                  <a href={p.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-all group">
-                    <FaExternalLinkAlt className="group-hover:-translate-y-1 transition-transform" /> View Live
+                  <a href={p.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-colors group">
+                    <FaExternalLinkAlt className="group-hover:-translate-y-1 transition-transform" /> View live
                   </a>
-                  <a href={p.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-white transition-all">
+                  <a href={p.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-white transition-colors">
                     <FaGithub /> Repository
                   </a>
                 </div>
@@ -181,7 +181,7 @@ const Work = () => {
           ))}
         </div>
 
-        {/* Supporting Projects */}
+        {/* Standard Projects Section */}
         <div className="mt-60 pt-20 border-t border-slate-900 grid grid-cols-1 md:grid-cols-2 gap-10">
           {standardProjects.map(proj => (
             <div key={proj.id} className="group p-8 bg-slate-900/20 rounded-3xl border border-slate-800 hover:border-blue-500/40 transition-all flex flex-col sm:flex-row gap-8">
