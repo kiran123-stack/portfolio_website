@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaVideo, FaPlayCircle } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaPlayCircle } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,7 +32,7 @@ const Work = () => {
       solution: "Built a 15-second research collapser that generates custom 3-day itineraries based on real-time budget data.",
       tech: ["Next.js", "Node.js", "Gemini AI", "Tailwind v4", "Gsap"],
       image: "/air.webp",
-      adVideo: "/ai_natour.mp4", // Ad video as requested
+      adVideo: "/ai_natour.mp4",
       demoVideo: "/demo_nator.mp4",
       liveLink: "https://natours-ai.vercel.app/",
       githubLink: "https://github.com/kiran123-stack/natours-ai"
@@ -60,147 +60,283 @@ const Work = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+
       gsap.from(".flagship-card", {
         scrollTrigger: {
           trigger: ".flagship-container",
-          start: "top 85%",
+          start: "top 85%"
         },
         y: 80,
         opacity: 0,
         duration: 1,
-        stagger: 0.3,
-        ease: "power4.out"
+        stagger: 0.25,
+        ease: "power3.out"
       });
 
-      // Video Hover Playback Logic
-      gsap.utils.toArray(".video-container").forEach(container => {
+      document.querySelectorAll(".video-container").forEach(container => {
         const video = container.querySelector("video");
-        container.addEventListener("mouseenter", () => video.play());
+
+        container.addEventListener("mouseenter", () => {
+          video.play();
+        });
+
         container.addEventListener("mouseleave", () => {
           video.pause();
           video.currentTime = 0;
         });
       });
+
     }, workRef);
+
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={workRef} className="min-h-screen py-32 px-6 bg-[#020617] text-slate-300 overflow-hidden">
+    <section
+      ref={workRef}
+      className="min-h-screen py-28 md:py-32 px-6 bg-[#020617] text-slate-300 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
-        
-        {/* Header Section */}
+
+        {/* Header */}
+
         <div className="mb-24 text-center md:text-left">
-          <h2 className="text-blue-500 font-mono tracking-widest text-sm uppercase mb-4">Engineering Case Studies</h2>
-          <h3 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
+          <h2 className="text-blue-500 font-mono tracking-widest text-sm uppercase mb-4">
+            Engineering Case Studies
+          </h2>
+
+          <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
             Where Code Meets <span className="text-blue-600 italic">Purpose.</span>
           </h3>
         </div>
 
-        {/* Flagship Projects Section */}
-        <div className="flagship-container space-y-48">
+
+        {/* Flagship Projects */}
+
+        <div className="flagship-container space-y-36 lg:space-y-48">
+
           {flagshipProjects.map((p, idx) => (
-            <div key={p.id} className="flagship-card grid lg:grid-cols-12 gap-12 items-start">
-              
-              {/* Visual Side (Left) */}
-              <div className={`lg:col-span-7 space-y-6 ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                
-                {/* Main Ad Video - Autoplays on Hover */}
-                <div className="video-container relative group rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-500/10">
-                  <video 
-                    src={p.adVideo} 
-                    muted 
-                    loop 
+
+            <div
+              key={p.id}
+              className="flagship-card grid lg:grid-cols-12 gap-12 lg:gap-20 items-center"
+            >
+
+              {/* Visual */}
+
+              <div className={`lg:col-span-7 flex flex-col gap-6 ${idx % 2 !== 0 ? "lg:order-2" : ""}`}>
+
+                {/* Ad Video */}
+
+                <div className="video-container relative group rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-500/20 transition-all duration-500">
+
+                  <video
+                    src={p.adVideo}
+                    muted
+                    loop
                     playsInline
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-8 pointer-events-none">
-                    <span className="flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs">
-                      <FaVideo className="text-blue-500 text-xl animate-pulse" /> Hover to Preview Ad
+
+                  <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                    <span className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest">
+                      <FaPlayCircle className="text-blue-500 text-lg animate-pulse" />
+                      Hover to Preview
                     </span>
                   </div>
+
                 </div>
-                
-                {/* Secondary Visual: Portrait Demo & Color Image */}
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Portrait Demo Video - object-contain ensures no cropping */}
-                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-video flex items-center justify-center">
-                    <video 
-                      src={p.demoVideo} 
-                      controls 
-                      className="h-full w-full object-contain" 
+
+
+                {/* Demo + Image */}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                  {/* Demo Video */}
+
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-black shadow-lg flex items-center justify-center">
+
+                    <video
+                      src={p.demoVideo}
+                      controls
+                      className="w-full h-[260px] md:h-full object-contain"
                     />
+
                   </div>
-                  {/* Vibrant Project Image */}
-                  <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-lg">
-                    <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+
+
+                  {/* Image */}
+
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-lg group">
+
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+
                   </div>
+
                 </div>
+
               </div>
 
-              {/* Content Side (Right) */}
-              <div className={`lg:col-span-5 flex flex-col space-y-8 ${idx % 2 !== 0 ? 'lg:order-1' : ''}`}>
+
+              {/* Content */}
+
+              <div className={`lg:col-span-5 flex flex-col space-y-8 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
+
                 <div>
-                  <h4 className="text-4xl font-bold text-white mb-2">{p.title}</h4>
-                  <p className="text-blue-400 font-mono text-sm tracking-widest uppercase">{p.tagline}</p>
+                  <h4 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    {p.title}
+                  </h4>
+
+                  <p className="text-blue-400 font-mono text-sm tracking-widest uppercase">
+                    {p.tagline}
+                  </p>
                 </div>
+
 
                 <div className="space-y-6">
+
                   <div className="flex gap-4">
                     <FaInfoCircle className="text-blue-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">The Problem</strong> {p.problem}</p>
+                    <p className="text-sm leading-relaxed">
+                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
+                        The Problem
+                      </strong>
+                      {p.problem}
+                    </p>
                   </div>
+
+
                   <div className="flex gap-4">
                     <FaShieldAlt className="text-red-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">Technical Challenge</strong> {p.challenge}</p>
+                    <p className="text-sm leading-relaxed">
+                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
+                        Technical Challenge
+                      </strong>
+                      {p.challenge}
+                    </p>
                   </div>
+
+
                   <div className="flex gap-4">
                     <FaRocket className="text-green-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed"><strong className="text-white block mb-1 uppercase tracking-tighter text-xs">Engineered Solution</strong> {p.solution}</p>
+                    <p className="text-sm leading-relaxed">
+                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
+                        Engineered Solution
+                      </strong>
+                      {p.solution}
+                    </p>
                   </div>
+
                 </div>
 
-                <div className="flex flex-wrap gap-2 pt-4">
+
+                {/* Tech */}
+
+                <div className="flex flex-wrap gap-2 pt-2">
                   {p.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] text-blue-300 font-bold uppercase tracking-tight">
+                    <span
+                      key={t}
+                      className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] text-blue-300 font-bold uppercase"
+                    >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex gap-8 pt-6">
-                  <a href={p.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-colors group">
-                    <FaExternalLinkAlt className="group-hover:-translate-y-1 transition-transform" /> View live
+
+                {/* Links */}
+
+                <div className="flex gap-8 pt-4">
+
+                  <a
+                    href={p.liveLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-colors"
+                  >
+                    <FaExternalLinkAlt />
+                    View Live
                   </a>
-                  <a href={p.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-white transition-colors">
-                    <FaGithub /> Repository
+
+                  <a
+                    href={p.githubLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-white transition-colors"
+                  >
+                    <FaGithub />
+                    Repository
                   </a>
+
                 </div>
+
               </div>
+
             </div>
+
           ))}
         </div>
 
-        {/* Standard Projects Section */}
-        <div className="mt-60 pt-20 border-t border-slate-900 grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        {/* Standard Projects */}
+
+        <div className="mt-56 pt-20 border-t border-slate-900 grid grid-cols-1 md:grid-cols-2 gap-10">
+
           {standardProjects.map(proj => (
-            <div key={proj.id} className="group p-8 bg-slate-900/20 rounded-3xl border border-slate-800 hover:border-blue-500/40 transition-all flex flex-col sm:flex-row gap-8">
-              <div className="w-full sm:w-1/3 aspect-video rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                <img src={proj.image} alt={proj.title} className="w-full h-full object-cover" />
+
+            <div
+              key={proj.id}
+              className="group p-6 md:p-8 bg-slate-900/30 rounded-3xl border border-slate-800 hover:border-blue-500/40 transition-all hover:-translate-y-2 flex flex-col sm:flex-row gap-8"
+            >
+
+              <div className="w-full sm:w-1/3 aspect-video rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
+
+
               <div className="flex-1 flex flex-col justify-center">
-                <h5 className="text-2xl font-bold text-white mb-2">{proj.title}</h5>
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">{proj.desc}</p>
+
+                <h5 className="text-2xl font-bold text-white mb-2">
+                  {proj.title}
+                </h5>
+
+                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                  {proj.desc}
+                </p>
+
                 <div className="flex justify-between items-center mt-auto border-t border-slate-800/50 pt-4">
-                  <span className="text-[10px] font-mono text-blue-500 uppercase font-bold tracking-widest">{proj.tech}</span>
-                  <a href={proj.link} target="_blank" rel="noreferrer" className="text-white hover:text-blue-400 transition-transform hover:scale-125">
+
+                  <span className="text-[10px] font-mono text-blue-500 uppercase font-bold tracking-widest">
+                    {proj.tech}
+                  </span>
+
+                  <a
+                    href={proj.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white hover:text-blue-400 transition-transform hover:scale-125"
+                  >
                     <FaExternalLinkAlt />
                   </a>
+
                 </div>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
+
       </div>
     </section>
   );
