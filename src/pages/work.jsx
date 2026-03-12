@@ -1,342 +1,129 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt, FaRocket, FaPlayCircle } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaCode, FaMicrochip, FaBolt, FaShieldAlt } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
-  const workRef = useRef(null);
+  const containerRef = useRef(null);
 
-  const flagshipProjects = [
+  const projects = [
     {
       id: "mindpulse",
       title: "MindPulse",
-      tagline: "Behavioral AI & Emotional Sanctuary",
-      problem: "Traditional chatbots are 'emotionally blind,' missing the user's physical state or cognitive load.",
-      challenge: "Developing a non-intrusive telemetry system to detect typing latency patterns without compromising privacy.",
-      solution: "Engineered a behavioral analysis engine with AES-256 encryption. Integrated 'Hana' mascot for a safe conversational space.",
-      tech: ["Next.js 16", "Grok", "AES-256", "GSAP", "Lenis"],
-      image: "/images.jfif",
-      adVideo: "/ad_mindpulse.mp4",
-      demoVideo: "/demo_mindpuls.mp4",
-      liveLink: "https://mind-pluse.vercel.app/",
-      githubLink: "https://github.com/kiran123-stack/MindPluse"
+      category: "Behavioral AI",
+      stats: "AES-256 Encrypted",
+      challenge: "High-latency detection in real-time typing dynamics.",
+      outcome: "94% Accuracy in stress pattern recognition.",
+      tech: ["Next.js", "Grok", "GSAP", "Tailwind"],
+      link: "https://mind-pluse.vercel.app/",
+      github: "https://github.com/kiran123-stack/MindPluse",
+      gridClass: "lg:col-span-8 lg:row-span-2", // Large Bento Block
+      bg: "bg-blue-600/5"
     },
     {
       id: "natours",
       title: "Natours AI",
-      tagline: "Autonomous Travel Orchestrator",
-      problem: "Planning a trip takes hours across fragmented platforms, leading to information overload.",
-      challenge: "Orchestrating multiple AI agents to generate structured itineraries while maintaining visual immersion.",
-      solution: "Built a 15-second research collapser that generates custom 3-day itineraries based on real-time budget data.",
-      tech: ["Next.js", "Node.js", "Gemini AI", "Tailwind v4", "Gsap"],
-      image: "/air.webp",
-      adVideo: "/ai_natour.mp4",
-      demoVideo: "/demo_nator.mp4",
-      liveLink: "https://natours-ai.vercel.app/",
-      githubLink: "https://github.com/kiran123-stack/natours-ai"
-    }
-  ];
-
-  const standardProjects = [
-    {
-      id: 3,
-      title: "Cinesphere",
-      desc: "Netflix-inspired streaming UI focusing on LCP optimization and semantic HTML.",
-      tech: "React, CSS3",
-      image: "/movie.jpg",
-      link: "https://cine-sphere-one.vercel.app/"
+      category: "Autonomous Travel",
+      stats: "15s Itinerary Gen",
+      challenge: "Multi-agent orchestration for real-time budget scraping.",
+      outcome: "Reduced planning time by 80%.",
+      tech: ["Gemini AI", "Node.js", "React"],
+      link: "https://natours-ai.vercel.app/",
+      github: "https://github.com/kiran123-stack/natours-ai",
+      gridClass: "lg:col-span-4 lg:row-span-1", // Medium Bento Block
+      bg: "bg-emerald-600/5"
     },
     {
-      id: 4,
-      title: "Oggy Landing Page",
-      desc: "Creative frontend implementation exploring micro-interactions and animations.",
-      tech: "HTML5, GSAP",
-      image: "/oggy.webp",
-      link: "https://oggy-nu.vercel.app/"
+      id: "cinesphere",
+      title: "Cinesphere",
+      category: "Streaming UI",
+      stats: "LCP < 1.2s",
+      challenge: "Optimizing Largest Contentful Paint for image-heavy grids.",
+      outcome: "Achieved 98/100 Lighthouse Performance score.",
+      tech: ["React", "Optimized Assets"],
+      link: "https://cine-sphere-one.vercel.app/",
+      gridClass: "lg:col-span-4 lg:row-span-1", // Small Bento Block
+      bg: "bg-purple-600/5"
     }
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-
-      gsap.from(".flagship-card", {
+      gsap.from(".bento-item", {
         scrollTrigger: {
-          trigger: ".flagship-container",
-          start: "top 85%"
+          trigger: ".bento-grid",
+          start: "top 80%",
         },
-        y: 80,
+        y: 50,
         opacity: 0,
-        duration: 1,
-        stagger: 0.25,
-        ease: "power3.out"
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out"
       });
-
-      document.querySelectorAll(".video-container").forEach(container => {
-        const video = container.querySelector("video");
-
-        container.addEventListener("mouseenter", () => {
-          video.play();
-        });
-
-        container.addEventListener("mouseleave", () => {
-          video.pause();
-          video.currentTime = 0;
-        });
-      });
-
-    }, workRef);
-
+    }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={workRef}
-      className="min-h-screen py-28 md:py-32 px-6 bg-[#020617] text-slate-300 overflow-hidden"
-    >
+    <section ref={containerRef} className="py-32 px-6 bg-[#020617] text-slate-300">
       <div className="max-w-7xl mx-auto">
-
-        {/* Header */}
-
-        <div className="mb-24 text-center md:text-left">
-          <h2 className="text-blue-500 font-mono tracking-widest text-sm uppercase mb-4">
-            Engineering Case Studies
-          </h2>
-
-          <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-            Where Code Meets <span className="text-blue-600 italic">Purpose.</span>
+        {/* Header Section */}
+        <div className="mb-16">
+          <h2 className="text-blue-500 font-mono text-sm tracking-widest uppercase mb-2">// Portfolio.v3</h2>
+          <h3 className="text-5xl font-bold text-white tracking-tight">
+            Selected <span className="text-blue-600 italic">Artifacts.</span>
           </h3>
         </div>
 
-
-        {/* Flagship Projects */}
-
-        <div className="flagship-container space-y-36 lg:space-y-48">
-
-          {flagshipProjects.map((p, idx) => (
-
+        {/* Bento Grid */}
+        <div className="bento-grid grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[280px]">
+          {projects.map((p) => (
             <div
               key={p.id}
-              className="flagship-card grid lg:grid-cols-12 gap-12 lg:gap-20 items-center"
+              className={`bento-item group relative overflow-hidden rounded-[2rem] border border-slate-800 p-8 flex flex-col justify-between transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 ${p.gridClass} ${p.bg}`}
             >
-
-              {/* Visual */}
-
-              <div className={`lg:col-span-7 flex flex-col gap-6 ${idx % 2 !== 0 ? "lg:order-2" : ""}`}>
-
-                {/* Ad Video */}
-
-                <div className="video-container relative group rounded-3xl overflow-hidden border border-slate-800 bg-black aspect-video shadow-2xl shadow-blue-500/20 transition-all duration-500">
-
-                  <video
-                    src={p.adVideo}
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-500 group-hover:scale-105"
-                  />
-
-                  <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/80 via-transparent to-transparent">
-                    <span className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest">
-                      <FaPlayCircle className="text-blue-500 text-lg animate-pulse" />
-                      Hover to Preview
-                    </span>
-                  </div>
-
+              {/* Top Layer: Category & Icon */}
+              <div className="flex justify-between items-start">
+                <div>
+                  <span className="px-3 py-1 rounded-full bg-slate-800 text-blue-400 text-[10px] font-bold uppercase tracking-wider">
+                    {p.category}
+                  </span>
+                  <h4 className="text-3xl font-bold text-white mt-4">{p.title}</h4>
                 </div>
-
-
-                {/* Demo + Image */}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                  {/* Demo Video */}
-
-                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-black shadow-lg flex items-center justify-center">
-
-                    <video
-                      src={p.demoVideo}
-                      controls
-                      className="w-full h-[260px] md:h-full object-contain"
-                    />
-
-                  </div>
-
-
-                  {/* Image */}
-
-                  <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-lg group">
-
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-
-                  </div>
-
+                <div className="flex gap-3">
+                  <a href={p.github} className="text-slate-500 hover:text-white transition-colors"><FaGithub size={20}/></a>
+                  <a href={p.link} className="text-slate-500 hover:text-white transition-colors"><FaExternalLinkAlt size={18}/></a>
                 </div>
-
               </div>
 
-
-              {/* Content */}
-
-              <div className={`lg:col-span-5 flex flex-col space-y-8 ${idx % 2 !== 0 ? "lg:order-1" : ""}`}>
-
-                <div>
-                  <h4 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                    {p.title}
-                  </h4>
-
-                  <p className="text-blue-400 font-mono text-sm tracking-widest uppercase">
-                    {p.tagline}
-                  </p>
+              {/* Middle Layer: Case Study Content (Only visible on large blocks) */}
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <FaShieldAlt className="text-blue-500 mt-1 shrink-0" />
+                  <p className="text-sm"><span className="text-white font-semibold">Challenge:</span> {p.challenge}</p>
                 </div>
-
-
-                <div className="space-y-6">
-
-                  <div className="flex gap-4">
-                    <FaInfoCircle className="text-blue-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed">
-                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
-                        The Problem
-                      </strong>
-                      {p.problem}
-                    </p>
-                  </div>
-
-
-                  <div className="flex gap-4">
-                    <FaShieldAlt className="text-red-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed">
-                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
-                        Technical Challenge
-                      </strong>
-                      {p.challenge}
-                    </p>
-                  </div>
-
-
-                  <div className="flex gap-4">
-                    <FaRocket className="text-green-500 mt-1 shrink-0" />
-                    <p className="text-sm leading-relaxed">
-                      <strong className="text-white block mb-1 uppercase text-xs tracking-tight">
-                        Engineered Solution
-                      </strong>
-                      {p.solution}
-                    </p>
-                  </div>
-
+                <div className="flex items-start gap-3">
+                  <FaBolt className="text-amber-500 mt-1 shrink-0" />
+                  <p className="text-sm"><span className="text-white font-semibold">Outcome:</span> {p.outcome}</p>
                 </div>
+              </div>
 
-
-                {/* Tech */}
-
-                <div className="flex flex-wrap gap-2 pt-2">
+              {/* Bottom Layer: Tech & Metrics */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800/50">
+                <div className="flex gap-2">
                   {p.tech.map(t => (
-                    <span
-                      key={t}
-                      className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] text-blue-300 font-bold uppercase"
-                    >
-                      {t}
-                    </span>
+                    <span key={t} className="text-[10px] font-mono text-slate-500 uppercase">{t}</span>
                   ))}
                 </div>
-
-
-                {/* Links */}
-
-                <div className="flex gap-8 pt-4">
-
-                  <a
-                    href={p.liveLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-colors"
-                  >
-                    <FaExternalLinkAlt />
-                    View Live
-                  </a>
-
-                  <a
-                    href={p.githubLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-white transition-colors"
-                  >
-                    <FaGithub />
-                    Repository
-                  </a>
-
+                <div className="flex items-center gap-2 text-xs font-bold text-blue-400">
+                  <FaMicrochip /> {p.stats}
                 </div>
-
               </div>
-
             </div>
-
           ))}
         </div>
-
-
-        {/* Standard Projects */}
-
-        <div className="mt-56 pt-20 border-t border-slate-900 grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          {standardProjects.map(proj => (
-
-            <div
-              key={proj.id}
-              className="group p-6 md:p-8 bg-slate-900/30 rounded-3xl border border-slate-800 hover:border-blue-500/40 transition-all hover:-translate-y-2 flex flex-col sm:flex-row gap-8"
-            >
-
-              <div className="w-full sm:w-1/3 aspect-video rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-
-              <div className="flex-1 flex flex-col justify-center">
-
-                <h5 className="text-2xl font-bold text-white mb-2">
-                  {proj.title}
-                </h5>
-
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
-                  {proj.desc}
-                </p>
-
-                <div className="flex justify-between items-center mt-auto border-t border-slate-800/50 pt-4">
-
-                  <span className="text-[10px] font-mono text-blue-500 uppercase font-bold tracking-widest">
-                    {proj.tech}
-                  </span>
-
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-white hover:text-blue-400 transition-transform hover:scale-125"
-                  >
-                    <FaExternalLinkAlt />
-                  </a>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
       </div>
     </section>
   );
