@@ -46,6 +46,14 @@ const Work = () => {
       link: "https://cine-sphere-one.vercel.app/",
       gridClass: "lg:col-span-4 lg:row-span-1",
       bg: "bg-purple-600/10"
+    },
+    {
+      id: "oggy landing page",
+      title: "Oggy Landing Page",
+      desc: "Creative frontend implementation exploring micro-interactions and animations.",
+      tech: "HTML5, GSAP","CSS","Javascript",
+      image: "/oggy.webp",
+      link: "https://oggy-nu.vercel.app/"
     }
   ];
 
