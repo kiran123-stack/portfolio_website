@@ -97,7 +97,7 @@ const Work = () => {
           {projects.map((p) => (
             <div
               key={p.id}
-              className={`bento-item border p-8 rounded-[2rem] flex flex-col justify-between transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl ${p.gridClass} ${p.bg} ${p.border}`}
+              className={`bento-item border p-8 rounded-[2rem] flex flex-col justify-between transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_0_70px_rgba(168,85,247,0.35)] ${p.gridClass}  bg-blue-500/10 border-blue-500/30  `}
             >
               <div className="flex justify-between items-start">
                 <div>
