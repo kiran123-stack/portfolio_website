@@ -41,11 +41,11 @@ const Home = () => {
         </div>
         <h1 className="hero-text text-4xl md:text-6xl font-bold leading-tight text-gray-100">
           Kiran <br />{" "}
-          <span className="text-blue-500">Frontend Developer</span>
+          <span className="text-blue-500"> MERN Stack & AI Developer </span>
         </h1>
         <p className="hero-text text-gray-300 max-w-md mx-auto md:mx-0">
-           A passionate Frontend Developer with expertise in React, Node.js, and MongoDB.
-            I specialize in building responsive, user-friendly websites and web applications. 
+           I build full-stack AI-powered web applications using MongoDB, Express, React, and Node.js. 
+            Passionate about creating smart, scalable, and user-friendly digital products that solve real-world problems. 
         </p>
         <div className="hero-text mt-6">
           <a
