@@ -49,7 +49,7 @@ const Home = () => {
         </p>
         <div className="hero-text mt-6">
           <a
-            href="/resume.pdf"
+            href="/Black and White Corporate Resume_20260301_205651_0000.pdf"
             download="Kiran_Resume.pdf"
             className="inline-block border-2 border-blue-500 text-blue-500 px-8 py-3 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
           >
