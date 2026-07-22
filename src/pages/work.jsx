@@ -47,9 +47,9 @@ const projects = [
     title: "Oggy Visuals",
     category: "Creative Frontend",
     description:
-      "A motion-driven landing page built as a GSAP study — scroll-triggered sequences and micro-interactions that tell a visual story.",
+      "A motion-driven landing page built as a building strong foundation on javascript html and css sequences and micro-interactions that tell a visual story.",
     meta: "Animation & interaction study",
-    tech: ["GSAP", "JavaScript", "HTML5"],
+    tech: ["css5", "JavaScript", "HTML5"],
     link: "https://oggy-nu.vercel.app/",
     github: "#",
     image: "/oggy.webp",
