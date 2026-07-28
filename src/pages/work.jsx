@@ -17,6 +17,19 @@ const projects = [
     featured: true,
   },
   {
+  id: "meddak",
+  title: "MedDak",
+  category: "Healthcare Procurement",
+  description:
+    "A modern healthcare procurement platform showcasing medical apparel, surgical instruments, and hospital equipment through a responsive, high-performance interface with immersive animations.",
+  meta: "Responsive design · GSAP animations",
+  tech: ["React", "Tailwind CSS", "GSAP"],
+  link: "https://kiran123-stack.github.io/med-dak/",
+  github: "https://github.com/kiran123-stack/med-dak",
+  image: "/cosmic.jpg", 
+  gridClass: "lg:col-span-5 lg:row-span-1",
+},
+  {
     id: "natours",
     title: "Natours AI",
     category: "AI Travel Planner",
