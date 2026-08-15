@@ -128,7 +128,7 @@ const CASES = [
     approach:
       "A zero-dependency i18n system, no routing library, no build-time compilation, flips the entire layout to RTL instantly through a single useLanguage() hook, with GSAP and Lenis handling scroll feel.",
     tech: ["Next.js 16", "TypeScript", "Tailwind v4", "GSAP", "Lenis"],
-    image: "https://picsum.photos/seed/ibn-sima-concierge/1200/800",
+    image: "https://github.com/user-attachments/assets/274423db-3168-4135-b3c0-dcbb04843e04",
     link: "https://ibn-sima.vercel.app/",
     github: "#",
   },
