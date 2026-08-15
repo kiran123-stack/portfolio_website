@@ -9,7 +9,7 @@ const CASES = [
     title: "MindPulse",
     category: "Behavioral AI",
     status: "Prototype",
-    year: "2025",
+    year: "2025", 
     description:
       "Reads typing rhythm and keystroke dynamics right in the browser to surface real-time stress signals — a prototype in privacy-first behavioral sensing.",
     approach:
