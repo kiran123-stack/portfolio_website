@@ -6,6 +6,9 @@ A modern, responsive personal portfolio website built to showcase my skills, pro
 
 [View Live Portfolio](https://portfolio-website-ten-weld-97.vercel.app/)
 
+<img width="1327" height="636" alt="image" src="https://github.com/user-attachments/assets/274423db-3168-4135-b3c0-dcbb04843e04" />
+
+
 ## ✨ Features
 
 - **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices using Tailwind CSS.
