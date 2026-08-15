@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.BASE_URL;
 const asset = (path) => {
   const cleanPath = path.replace(/^\/+/, "");
   return `${BASE_URL}${cleanPath}`;
-};
+}; 
 
 const CASES = [
   {
