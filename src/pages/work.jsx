@@ -845,7 +845,7 @@ const styles = `
 .stat-content span {
   font-size: 8px;
 
-  color: #7c806f;
+  color: black;
 
   letter-spacing: .02em;
 }
