@@ -211,8 +211,8 @@ const PROJECTS = [
     approach:
       "The project explores large-scale canvas animation, interactive perspective effects, radial interface elements and glassmorphic UI to create an immersive experience.",
     tech: ["HTML5", "CSS3", "JavaScript", "Canvas", "Animation"],
-    image:
-      "https://kiran123-stack.github.io/careGlobe/",
+    image: "https://res.cloudinary.com/smiudv7m/image/upload/v1791289485/Screenshot_2026-10-06_175405.png",
+     
     link: "https://kiran123-stack.github.io/careGlobe/",
     github: "https://github.com/kiran123-stack/careGlobe",
     challenge:
