@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { FaGithub } from "react-icons/fa";
-import { FiArrowUpRight } from "react-icons/fi";
+import React, { useEffect, useState } from "react";
 
-const CASES = [
+const PROJECTS = [
   {
-    file: "01",
+    number: "01",
     id: "mindpulse",
     title: "MindPulse",
     category: "Behavioral AI",
     status: "Prototype",
-    year: "2025", 
+    year: "2025",
     description:
       "Reads typing rhythm and keystroke dynamics right in the browser to surface real-time stress signals — a prototype in privacy-first behavioral sensing.",
     approach:
@@ -18,9 +16,14 @@ const CASES = [
     image: "/images.jfif",
     link: "https://mind-pluse.vercel.app/",
     github: "https://github.com/kiran123-stack/MindPluse",
+    challenge:
+      "Create a behavioral AI experience capable of interpreting typing patterns while keeping the interaction privacy-focused.",
+    solution:
+      "MindPulse processes the typing signal on the client side and turns the resulting behavioral data into a real-time visual experience.",
   },
+
   {
-    file: "02",
+    number: "02",
     id: "meddak",
     title: "MedDak",
     category: "Healthcare Procurement",
@@ -34,9 +37,14 @@ const CASES = [
     image: "/cosmic.jpg",
     link: "https://kiran123-stack.github.io/med-dak/",
     github: "https://github.com/kiran123-stack/med-dak",
+    challenge:
+      "Design a procurement-focused healthcare interface that feels like a modern digital product rather than a static catalogue.",
+    solution:
+      "The experience uses reusable React components, structured service sections and subtle scroll-based reveals to make the procurement journey easier to navigate.",
   },
+
   {
-    file: "03",
+    number: "03",
     id: "natours",
     title: "Natours AI",
     category: "AI Travel Planner",
@@ -50,9 +58,14 @@ const CASES = [
     image: "/air.webp",
     link: "https://natours-ai.vercel.app/",
     github: "https://github.com/kiran123-stack/natours-ai",
+    challenge:
+      "Reduce the effort required to manually create a structured multi-day travel itinerary.",
+    solution:
+      "A Node.js service coordinates Gemini-powered generation so a short user brief can become a structured itinerary.",
   },
+
   {
-    file: "04",
+    number: "04",
     id: "cinesphere",
     title: "Cinesphere",
     category: "Streaming UI",
@@ -66,9 +79,14 @@ const CASES = [
     image: "/movie.jpg",
     link: "https://cine-sphere-one.vercel.app/",
     github: "#",
+    challenge:
+      "Build an image-heavy movie discovery interface without making browsing feel slow or overloaded.",
+    solution:
+      "The interface focuses on a lightweight React/CSS grid and prioritizes smooth scrolling and straightforward discovery.",
   },
+
   {
-    file: "05",
+    number: "05",
     id: "oggy-landing",
     title: "Oggy Visuals",
     category: "Creative Frontend",
@@ -82,9 +100,14 @@ const CASES = [
     image: "/oggy.webp",
     link: "https://oggy-nu.vercel.app/",
     github: "#",
+    challenge:
+      "Explore how much interaction and visual sequencing could be achieved without relying on a frontend framework or animation library.",
+    solution:
+      "The landing page uses vanilla HTML, CSS and JavaScript with custom sequencing and hover interactions.",
   },
+
   {
-    file: "06",
+    number: "06",
     id: "disitech",
     title: "DisiTech",
     category: "Web Dev Agency",
@@ -98,9 +121,14 @@ const CASES = [
     image: "https://kiran123-stack.github.io/disitech/hero.jpg",
     link: "https://kiran123-stack.github.io/disitech/",
     github: "#",
+    challenge:
+      "Create an agency website that communicates business value instead of simply displaying design work.",
+    solution:
+      "The page is structured around problem → solution → proof, using case-study storytelling as the main conversion mechanism.",
   },
+
   {
-    file: "07",
+    number: "07",
     id: "trendmedi",
     title: "TrendMedi",
     category: "Healthcare B2B",
@@ -115,214 +143,1159 @@ const CASES = [
       "https://kiran123-stack.github.io/trendmedi_1/images/hospital_corridor.jpg",
     link: "https://kiran123-stack.github.io/trendmedi_1/",
     github: "#",
+    challenge:
+      "Transform a traditional medical-supply catalogue experience into a structured B2B digital product.",
+    solution:
+      "Product filtering, interactive product details and dedicated procurement sections create a more usable purchasing experience.",
   },
+
   {
-    file: "08",
+    number: "08",
     id: "ibn-sima",
     title: "Ibn Sima",
     category: "Medical Tourism · i18n",
     status: "Live",
     year: "2026",
     description:
-      "A bilingual (English / Arabic) medical tourism platform built as a luxury travel concierge experience for patients from Iraq and the UAE — not a clinical medical site.",
+      "A bilingual English / Arabic medical tourism platform built as a luxury travel concierge experience for patients from Iraq and the UAE — not a clinical medical site.",
     approach:
       "A zero-dependency i18n system, no routing library, no build-time compilation, flips the entire layout to RTL instantly through a single useLanguage() hook, with GSAP and Lenis handling scroll feel.",
-    tech: ["Next.js 16", "TypeScript", "Tailwind v4", "GSAP", "Lenis"],
-    image: "https://github.com/user-attachments/assets/274423db-3168-4135-b3c0-dcbb04843e04",
+    tech: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind v4",
+      "GSAP",
+      "Lenis",
+    ],
+    image:
+      "https://github.com/user-attachments/assets/274423db-3168-4135-b3c0-dcbb04843e04",
     link: "https://ibn-sima.vercel.app/",
     github: "#",
+    challenge:
+      "Create a premium medical-tourism experience that supports both English and Arabic users while maintaining a consistent visual system.",
+    solution:
+      "A lightweight internationalization approach switches the interface between LTR and RTL layouts while preserving the overall experience.",
   },
 ];
 
 const STATUS_STYLES = {
-  Live: "text-emerald-400 border-emerald-400/30",
-  Concept: "text-[#C6A15B] border-[#C6A15B]/30",
-  Prototype: "text-sky-400 border-sky-400/30",
-  "In Progress": "text-orange-400 border-orange-400/30",
+  Live: "bg-[#edf8df] text-[#315d18]",
+  Prototype: "bg-[#fff0bf] text-[#946400]",
+  Concept: "bg-[#f3e9d1] text-[#775f35]",
+  "In Progress": "bg-[#ffe3a5] text-[#895a00]",
 };
 
-const Work = () => {
-  const [active, setActive] = useState(0);
-  const current = CASES[active];
+export default function SelectedProjects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedProject ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
-    <section className="w-full bg-[#0A0C10] py-24 text-[#EDEAE1]">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
-      `}</style>
+    <>
+      <section className="projects-section">
+        <div className="projects-container">
 
-      <div className="mx-auto max-w-7xl px-6" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-        {/* Heading */}
-        <div className="mb-14 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p
-              className="mb-3 text-xs uppercase tracking-[0.3em] text-[#C6A15B]"
-              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-            >
-              Case File Archive
-            </p>
-            <h2
-              className="text-4xl font-semibold tracking-tight text-white sm:text-5xl"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-            >
-              Things I&apos;ve designed &amp; built
-            </h2>
-          </div>
-          <p
-            className="max-w-sm text-xs leading-relaxed text-white/40"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-          >
-            {CASES.length} files on record. Open one to see the brief, the
-            approach, and what shipped.
-          </p>
-        </div>
+          {/* ================= HEADER ================= */}
+          <div className="projects-header">
 
-        {/* Archive: index rail + case panel */}
-        <div className="flex flex-col gap-0 overflow-hidden lg:flex-row lg:rounded-2xl lg:border lg:border-white/10">
-          {/* Index rail */}
-          <div className="flex gap-2 overflow-x-auto pb-1 lg:w-72 lg:flex-none lg:flex-col lg:gap-0 lg:overflow-visible lg:border-r lg:border-white/10 lg:bg-[#0D1016] lg:pb-0">
-            {CASES.map((c, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setActive(i)}
-                  className={`group flex flex-shrink-0 items-center gap-3 border-b border-white/5 px-4 py-4 text-left transition-colors lg:w-full lg:flex-shrink ${
-                    isActive ? "bg-[#161A22]" : "hover:bg-white/[0.03]"
-                  }`}
-                >
-                  <span
-                    className={`text-xs ${isActive ? "text-[#C6A15B]" : "text-white/30"}`}
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    {c.file}
-                  </span>
-                  <span className="min-w-[7rem] flex-1">
-                    <span
-                      className={`block text-sm font-medium ${isActive ? "text-white" : "text-white/60"}`}
-                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                    >
-                      {c.title}
-                    </span>
-                    <span
-                      className="block text-[10px] uppercase tracking-wider text-white/30"
-                      style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                    >
-                      {c.category}
-                    </span>
-                  </span>
-                  <span
-                    className={`hidden h-1.5 w-1.5 flex-none rounded-full lg:block ${
-                      isActive ? "bg-[#C6A15B]" : "bg-white/15"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Case panel */}
-          <div key={current.id} className="relative flex-1 lg:bg-[#12151B]">
-            <div className="relative h-64 w-full overflow-hidden sm:h-80">
-              <img
-                src={current.image}
-                alt={current.title}
-                loading="lazy"
-                className="h-full w-full object-cover opacity-70"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#12151B] via-[#12151B]/40 to-transparent" />
-              <span
-                className={`absolute right-5 top-5 rounded-full border px-3 py-1 text-[10px] uppercase tracking-widest backdrop-blur-sm ${
-                  STATUS_STYLES[current.status] || "border-white/20 text-white/60"
-                }`}
-                style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-              >
-                {current.status}
-              </span>
-            </div>
-
-            <div className="p-6 sm:p-10">
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
-                <div>
-                  <p
-                    className="mb-1 text-xs uppercase tracking-widest text-[#C6A15B]"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    File {current.file} — {current.category} · {current.year}
-                  </p>
-                  <h3
-                    className="text-3xl font-semibold text-white sm:text-4xl"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
-                    {current.title}
-                  </h3>
-                </div>
-                <div className="flex gap-3">
-                  {current.github !== "#" && (
-                    <a
-                      href={current.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${current.title} source code`}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-white/40 hover:text-white"
-                    >
-                      <FaGithub size={16} />
-                    </a>
-                  )}
-                  <a
-                    href={current.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1.5 rounded-full border border-[#C6A15B]/40 px-4 py-2 text-xs uppercase tracking-wider text-[#C6A15B] transition hover:bg-[#C6A15B]/10"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    Open File <FiArrowUpRight size={13} />
-                  </a>
-                </div>
+            <div>
+              <div className="brand-mark">
+                Himel.
               </div>
 
-              <p className="mb-6 max-w-2xl text-base leading-relaxed text-white/75">
-                {current.description}
+              <div className="page-label">
+                PAGE 02 OF 04 &nbsp; / &nbsp; PROJECTS / CASE STUDIES
+              </div>
+
+              <h1>
+                Selected
+                <span>Projects.</span>
+              </h1>
+
+              <p className="handwritten">
+                — Real Designs. Real Results. ♡
+              </p>
+            </div>
+
+          </div>
+
+          {/* ================= STATS ================= */}
+          <div className="stats-grid">
+
+            <Stat
+              icon="▣"
+              value="8"
+              label="Projects Completed"
+            />
+
+            <Stat
+              icon="◎"
+              value="1"
+              label="Internship"
+            />
+
+            <Stat
+              icon="♙"
+              value="1"
+              label="Research — KONsensX"
+            />
+
+            <Stat
+              icon="◷"
+              value="2500+"
+              label="Hours of Work"
+            />
+
+          </div>
+
+          {/* ================= PROJECT GRID ================= */}
+          <div className="project-grid">
+
+            {PROJECTS.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onOpen={() => setSelectedProject(project)}
+              />
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= CASE STUDY MODAL ================= */}
+      {selectedProject && (
+        <CaseStudyModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
+    </>
+  );
+}
+
+
+/* =====================================================
+   STAT COMPONENT
+===================================================== */
+
+function Stat({ icon, value, label }) {
+  return (
+    <div className="stat-card">
+
+      <div className="stat-icon">
+        {icon}
+      </div>
+
+      <div className="stat-content">
+        <strong>{value}</strong>
+        <span>{label}</span>
+      </div>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   PROJECT CARD
+===================================================== */
+
+function ProjectCard({ project, onOpen }) {
+  return (
+    <article className="project-card">
+
+      {/* number */}
+      <div className="project-number">
+        {project.number}
+      </div>
+
+      {/* image */}
+      <div className="project-image-wrapper">
+
+        <img
+          src={project.image}
+          alt={`${project.title} website`}
+          className="project-image"
+          loading="lazy"
+        />
+
+        <div className="image-overlay" />
+
+        <span
+          className={`status-pill ${
+            STATUS_STYLES[project.status] || STATUS_STYLES.Live
+          }`}
+        >
+          {project.status}
+        </span>
+
+      </div>
+
+      {/* content */}
+      <div className="project-content">
+
+        <div className="project-title-row">
+
+          <div>
+            <h2>{project.title}</h2>
+
+            <p>
+              {project.category}
+            </p>
+          </div>
+
+          <span className="project-year">
+            {project.year}
+          </span>
+
+        </div>
+
+        <p className="project-description">
+          {project.description}
+        </p>
+
+        <div className="project-tags">
+
+          {project.tech.slice(0, 3).map((technology) => (
+            <span key={technology}>
+              {technology}
+            </span>
+          ))}
+
+        </div>
+
+        <button
+          className="case-study-button"
+          onClick={onOpen}
+        >
+          <span>View Case Study</span>
+          <span className="arrow">↗</span>
+        </button>
+
+      </div>
+
+    </article>
+  );
+}
+
+
+/* =====================================================
+   CASE STUDY MODAL
+===================================================== */
+
+function CaseStudyModal({ project, onClose }) {
+  return (
+    <div
+      className="modal-backdrop"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+
+      <div className="case-study-modal">
+
+        {/* top */}
+        <div className="modal-top">
+
+          <div className="modal-file">
+            CASE STUDY / {project.number}
+          </div>
+
+          <button
+            className="close-button"
+            onClick={onClose}
+            aria-label="Close case study"
+          >
+            ×
+          </button>
+
+        </div>
+
+        {/* hero */}
+        <div className="modal-hero">
+
+          <img
+            src={project.image}
+            alt={project.title}
+          />
+
+          <div className="modal-hero-overlay" />
+
+          <div className="modal-hero-content">
+
+            <span
+              className={`status-pill ${
+                STATUS_STYLES[project.status] || STATUS_STYLES.Live
+              }`}
+            >
+              {project.status}
+            </span>
+
+            <p>
+              {project.category} · {project.year}
+            </p>
+
+            <h2>
+              {project.title}
+            </h2>
+
+          </div>
+
+        </div>
+
+        {/* body */}
+        <div className="modal-body">
+
+          <section className="modal-intro">
+
+            <span className="section-label">
+              OVERVIEW
+            </span>
+
+            <p>
+              {project.description}
+            </p>
+
+          </section>
+
+
+          <div className="modal-two-column">
+
+            {/* challenge */}
+            <section>
+
+              <span className="section-label">
+                01 — CHALLENGE
+              </span>
+
+              <h3>
+                The problem
+              </h3>
+
+              <p>
+                {project.challenge}
               </p>
 
-              <div className="grid gap-6 border-t border-white/10 pt-6 sm:grid-cols-2">
-                <div>
-                  <p
-                    className="mb-2 text-[10px] uppercase tracking-widest text-white/35"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    Approach
-                  </p>
-                  <p className="text-sm leading-relaxed text-white/60">
-                    {current.approach}
-                  </p>
-                </div>
-                <div>
-                  <p
-                    className="mb-2 text-[10px] uppercase tracking-widest text-white/35"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    Stack
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {current.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[10px] uppercase tracking-wide text-white/60"
-                        style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+            </section>
 
-export default Work;
+
+            {/* solution */}
+            <section>
+
+              <span className="section-label">
+                02 — SOLUTION
+              </span>
+
+              <h3>
+                The approach
+              </h3>
+
+              <p>
+                {project.solution}
+              </p>
+
+            </section>
+
+          </div>
+
+
+          {/* implementation */}
+          <section className="implementation-section">
+
+            <span className="section-label">
+              03 — IMPLEMENTATION
+            </span>
+
+            <h3>
+              How it was built
+            </h3>
+
+            <p>
+              {project.approach}
+            </p>
+
+          </section>
+
+
+          {/* stack */}
+          <section className="stack-section">
+
+            <span className="section-label">
+              TECHNOLOGY
+            </span>
+
+            <div className="modal-tech">
+
+              {project.tech.map((technology) => (
+                <span key={technology}>
+                  {technology}
+                </span>
+              ))}
+
+            </div>
+
+          </section>
+
+
+          {/* buttons */}
+          <div className="modal-actions">
+
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="live-button"
+            >
+              Visit Live Site
+              <span>↗</span>
+            </a>
+
+            {project.github !== "#" && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="github-button"
+              >
+                GitHub
+                <span>↗</span>
+              </a>
+            )}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   STYLES
+===================================================== */
+
+const styles = `
+.projects-section {
+  width: 100%;
+  min-height: 100vh;
+  background: #f7f0df;
+  color: #172019;
+  padding: 42px 20px 70px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.projects-header {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.brand-mark {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 21px;
+  font-weight: 700;
+  color: #17351f;
+  margin-bottom: 18px;
+}
+
+.page-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 9px;
+  letter-spacing: .05em;
+  color: #6c725f;
+}
+
+.projects-header h1 {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 76px);
+  line-height: .86;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+  color: #13251b;
+}
+
+.projects-header h1 span {
+  display: block;
+  color: #eda719;
+}
+
+.handwritten {
+  margin: 10px 0 0 10px;
+  color: #8c8067;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  transform: rotate(-2deg);
+}
+
+
+/* STATS */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 28px 0 25px;
+}
+
+.stat-card {
+  min-height: 55px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid #ded7c5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  box-shadow: 0 2px 7px rgba(73, 61, 31, .05);
+}
+
+.stat-icon {
+  width: 27px;
+  height: 27px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff1bf;
+  color: #df9b09;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-content strong {
+  font-size: 15px;
+  line-height: 1;
+  color: #1e281f;
+}
+
+.stat-content span {
+  font-size: 8px;
+  color: #7c806f;
+  letter-spacing: .02em;
+}
+
+
+/* PROJECT GRID */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.project-card {
+  position: relative;
+  background: #fffdf7;
+  border: 1px solid #ded8c8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(71, 62, 40, .08);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(71, 62, 40, .13);
+}
+
+.project-number {
+  position: absolute;
+  z-index: 5;
+  top: 6px;
+  left: 6px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #17251c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.project-image-wrapper {
+  height: 122px;
+  position: relative;
+  overflow: hidden;
+  background: #ded7c5;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.04);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(15, 24, 18, .02),
+      rgba(15, 24, 18, .17)
+    );
+}
+
+.status-pill {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 7px;
+  border-radius: 20px;
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.project-content {
+  padding: 11px;
+}
+
+.project-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.project-title-row h2 {
+  margin: 0;
+  color: #1d2a20;
+  font-size: 14px;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.project-title-row p {
+  margin: 3px 0 0;
+  color: #b07a08;
+  font-size: 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.project-year {
+  color: #989987;
+  font-size: 8px;
+}
+
+.project-description {
+  margin: 0;
+  min-height: 49px;
+  color: #73766b;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.project-tags span {
+  background: #f5efdf;
+  color: #6e6e5e;
+  border-radius: 3px;
+  padding: 3px 5px;
+  font-size: 6px;
+  font-weight: 600;
+}
+
+.case-study-button {
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 8px;
+  background: #163b26;
+  color: #fffdf4;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 7px;
+  font-weight: 700;
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.case-study-button:hover {
+  background: #205434;
+}
+
+.case-study-button .arrow {
+  font-size: 11px;
+}
+
+
+/* MODAL */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(16, 23, 18, .72);
+  backdrop-filter: blur(8px);
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .2s ease;
+}
+
+.case-study-modal {
+  width: min(900px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #fffdf7;
+  border-radius: 18px;
+  border: 1px solid #ddd6c4;
+  box-shadow: 0 25px 80px rgba(0,0,0,.3);
+  animation: modalIn .25s ease;
+}
+
+.modal-top {
+  height: 50px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8e1d2;
+}
+
+.modal-file {
+  color: #8a836f;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.close-button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1ecde;
+  color: #354236;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-hero {
+  height: 290px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(14, 29, 19, .95),
+    rgba(14, 29, 19, .1)
+  );
+}
+
+.modal-hero-content {
+  position: absolute;
+  bottom: 28px;
+  left: 32px;
+  right: 32px;
+  color: white;
+}
+
+.modal-hero-content p {
+  margin: 10px 0 5px;
+  color: #f3bd38;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 700;
+}
+
+.modal-hero-content h2 {
+  margin: 0;
+  font-size: clamp(35px, 6vw, 58px);
+  line-height: .95;
+  letter-spacing: -.045em;
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #b27a05;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.modal-intro {
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e8e1d2;
+}
+
+.modal-intro p {
+  max-width: 730px;
+  margin: 0;
+  color: #444b43;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.modal-two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  padding: 30px 0;
+  border-bottom: 1px solid #e8e1d2;
+}
+
+.modal-two-column h3,
+.implementation-section h3 {
+  margin: 0 0 8px;
+  color: #1c291f;
+  font-size: 21px;
+}
+
+.modal-two-column p,
+.implementation-section p {
+  margin: 0;
+  color: #71766c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.implementation-section {
+  padding: 30px 0;
+  border-bottom: 1px solid #e8e1d2;
+}
+
+.implementation-section p {
+  max-width: 780px;
+}
+
+.stack-section {
+  padding: 25px 0;
+}
+
+.modal-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.modal-tech span {
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: #f5efdf;
+  border: 1px solid #e5ddca;
+  color: #5e6358;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding-top: 5px;
+}
+
+.live-button,
+.github-button {
+  text-decoration: none;
+  padding: 11px 17px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-button {
+  background: #173d27;
+  color: white;
+}
+
+.github-button {
+  background: #f4eee0;
+  color: #354237;
+  border: 1px solid #ded6c3;
+}
+
+.live-button:hover {
+  background: #245737;
+}
+
+.github-button:hover {
+  background: #ebe3d1;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-label {
+    position: static;
+    margin-bottom: 15px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 560px) {
+
+  .projects-section {
+    padding: 28px 12px 50px;
+  }
+
+  .projects-header h1 {
+    font-size: 54px;
+  }
+
+  .page-label {
+    font-size: 7px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .stat-card {
+    min-height: 52px;
+    padding: 7px 8px;
+  }
+
+  .stat-content strong {
+    font-size: 13px;
+  }
+
+  .stat-content span {
+    font-size: 7px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .project-image-wrapper {
+    height: 190px;
+  }
+
+  .project-content {
+    padding: 14px;
+  }
+
+  .project-title-row h2 {
+    font-size: 18px;
+  }
+
+  .project-title-row p {
+    font-size: 8px;
+  }
+
+  .project-description {
+    min-height: auto;
+    font-size: 10px;
+  }
+
+  .project-tags span {
+    font-size: 7px;
+  }
+
+  .case-study-button {
+    padding: 10px;
+    font-size: 9px;
+  }
+
+  .modal-backdrop {
+    padding: 0;
+  }
+
+  .case-study-modal {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .modal-hero {
+    height: 230px;
+  }
+
+  .modal-body {
+    padding: 22px 18px 35px;
+  }
+
+  .modal-two-column {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .modal-intro p {
+    font-size: 15px;
+  }
+
+  .modal-two-column p,
+  .implementation-section p {
+    font-size: 12px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .live-button,
+  .github-button {
+    justify-content: center;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL DEVICES
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .projects-header h1 {
+    font-size: 46px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image-wrapper {
+    height: 165px;
+  }
+
+}
+`;
+
+// Inject styles once
+if (typeof document !== "undefined") {
+  const styleId = "selected-projects-styles";
+
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.innerHTML = styles;
+    document.head.appendChild(style);
+  }
+}
