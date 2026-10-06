@@ -264,13 +264,8 @@ export default function SelectedProjects() {
 
           <div className="projects-header">
             <div>
-              <div className="brand-mark">
-                Himel.
-              </div>
-
-              <div className="page-label">
-                PAGE 02 OF 04 &nbsp; / &nbsp; PROJECTS / CASE STUDIES
-              </div>
+              
+             
 
               <h1>
                 Selected
