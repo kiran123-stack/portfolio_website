@@ -839,7 +839,7 @@ const styles = `
 
   line-height: 1;
 
-  color: #1e281f;
+  color: black;
 }
 
 .stat-content span {
