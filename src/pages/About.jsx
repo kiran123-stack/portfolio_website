@@ -1,48 +1,57 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Brands Icons
-import { 
-  faReact, 
-  faJsSquare, 
-  faHtml5, 
-  faCss3Alt, 
-  faNodeJs, 
-  faGithub, 
-  faGitAlt 
-} from '@fortawesome/free-brands-svg-icons'; 
+import {
+  faReact,
+  faJsSquare,
+  faHtml5,
+  faCss3Alt,
+  faNodeJs,
+  faGithub,
+  faGitAlt,
+} from "@fortawesome/free-brands-svg-icons";
 
-// Solid Icons (Merged into one clean block)
-import { 
-  faGraduationCap, 
-  faSchool, 
-  faUniversity, 
-  faCode,      // For TypeScript
-  faWind,      // For Tailwind
-  faDatabase,  // For MongoDB
-  faServer,    // For Express
-  faBolt,      // For GSAP
-  faN          // For Next.js
-} from '@fortawesome/free-solid-svg-icons';
+// Solid Icons
+import {
+  faGraduationCap,
+  faSchool,
+  faUniversity,
+  faCode,
+  faWind,
+  faDatabase,
+  faServer,
+  faBolt,
+  faN,
+  faBriefcase,
+} from "@fortawesome/free-solid-svg-icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const aboutRef = useRef(null);
   const educationRef = useRef(null);
+  const experienceRef = useRef(null);
   const skillsRef = useRef(null);
   const contactRef = useRef(null);
   const skillCardsRef = useRef([]);
 
   useEffect(() => {
     // --- SECTION ENTRANCE ANIMATIONS ---
-    const fadeUps = [aboutRef, educationRef, skillsRef, contactRef];
+    const fadeUps = [
+      aboutRef,
+      educationRef,
+      experienceRef,
+      skillsRef,
+      contactRef,
+    ];
 
     fadeUps.forEach((ref) => {
       if (!ref.current) return;
+
       gsap.fromTo(
         ref.current,
         { opacity: 0, y: 50 },
@@ -80,7 +89,7 @@ const About = () => {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -92,25 +101,35 @@ const About = () => {
 
   return (
     <div className="bg-slate-900 min-h-screen">
+
       {/* ================= ABOUT ME SECTION ================= */}
-      <section ref={aboutRef} className="py-20 px-6 md:px-32 text-center text-white border-b border-slate-800">
-        <h2 className="text-4xl font-bold mb-8 uppercase tracking-widest text-blue-500">About ME</h2>
+      <section
+        ref={aboutRef}
+        className="py-20 px-6 md:px-32 text-center text-white border-b border-slate-800"
+      >
+        <h2 className="text-4xl font-bold mb-8 uppercase tracking-widest text-blue-500">
+          About ME
+        </h2>
+
         <div className="space-y-4 max-w-3xl mx-auto text-lg mb-10 text-slate-300 leading-relaxed">
           <p>
-            I am a passionate developer specializing in building 
-            clean, responsive web applications with modern technologies. My focus is on writing 
-            efficient code and designing intuitive user interfaces.
+            I am a passionate developer specializing in building
+            clean, responsive web applications with modern technologies. My
+            focus is on writing efficient code and designing intuitive user
+            interfaces.
           </p>
         </div>
+
         <div className="flex flex-col md:flex-row justify-center gap-6">
-          <Link 
-            to="/work" 
+          <Link
+            to="/work"
             className="border-2 border-white px-8 py-3 rounded-full text-white font-medium hover:bg-white hover:text-slate-900 transition-all duration-300 transform hover:scale-105 inline-block"
           >
             View Work
           </Link>
-          <Link 
-            to="/contact" 
+
+          <Link
+            to="/contact"
             className="border-2 border-blue-600 px-8 py-3 rounded-full text-blue-600 font-medium hover:bg-blue-600 hover:text-white hover:shadow-[0_0_15px_rgba(37,99,235,0.5)] transition-all duration-300 transform hover:scale-105 inline-block"
           >
             Contact Me
@@ -118,70 +137,322 @@ const About = () => {
         </div>
       </section>
 
+
       {/* ================= EDUCATION SECTION ================= */}
-      <section ref={educationRef} className="py-20 px-6 md:px-32 bg-slate-900 text-white border-b border-slate-800">
+      <section
+        ref={educationRef}
+        className="py-20 px-6 md:px-32 bg-slate-900 text-white border-b border-slate-800"
+      >
         <div className="max-w-5xl mx-auto">
+
           <h2 className="text-3xl font-bold mb-12 text-center border-b-2 border-blue-500 inline-block pb-2 tracking-wide mx-auto table uppercase">
-              EDUCATION
+            EDUCATION
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
             <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-2 group">
+
               <div className="flex items-center gap-4 mb-4">
+
                 <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:bg-blue-500/20 transition-all">
                   <FontAwesomeIcon icon={faUniversity} size="lg" />
                 </div>
+
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">BCA</h3>
-                  <p className="text-slate-400 text-sm">IGNOU</p>
+                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                    BCA
+                  </h3>
+
+                  <p className="text-slate-400 text-sm">
+                    IGNOU
+                  </p>
                 </div>
+
               </div>
-              <p className="text-blue-400 font-semibold mb-3 text-sm">Current Student</p>
-              <p className="text-slate-300 leading-relaxed text-sm">
-                Building a strong foundation in computer science while specializing in modern <strong className="text-white">Web Development</strong>.
+
+              <p className="text-blue-400 font-semibold mb-3 text-sm">
+                Current Student
               </p>
+
+              <p className="text-slate-300 leading-relaxed text-sm">
+                Building a strong foundation in computer science while
+                specializing in modern{" "}
+                <strong className="text-white">
+                  Web Development
+                </strong>.
+              </p>
+
             </div>
 
+
             <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-2 group">
+
               <div className="flex items-center gap-4 mb-4">
-                 <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 group-hover:text-green-300 group-hover:bg-green-500/20 transition-all">
+
+                <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 group-hover:text-green-300 group-hover:bg-green-500/20 transition-all">
                   <FontAwesomeIcon icon={faSchool} size="lg" />
                 </div>
+
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">High School</h3>
-                  <p className="text-slate-400 text-sm">Dhruva Public School</p>
+                  <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                    High School
+                  </h3>
+
+                  <p className="text-slate-400 text-sm">
+                    Dhruva Public School
+                  </p>
                 </div>
+
               </div>
-              <p className="text-green-400 font-semibold mb-3 text-sm">Completed: 2024</p>
-              <p className="text-slate-300 leading-relaxed text-sm">
-                Focused on <strong className="text-white">Science Stream</strong> with <strong className="text-white">79%</strong>, developing a strong analytical mindset.
+
+              <p className="text-green-400 font-semibold mb-3 text-sm">
+                Completed: 2024
               </p>
+
+              <p className="text-slate-300 leading-relaxed text-sm">
+                Focused on{" "}
+                <strong className="text-white">
+                  Science Stream
+                </strong>{" "}
+                with{" "}
+                <strong className="text-white">
+                  79%
+                </strong>
+                , developing a strong analytical mindset.
+              </p>
+
             </div>
+
           </div>
         </div>
       </section>
 
+
+      {/* ================= EXPERIENCE SECTION ================= */}
+      <section
+        ref={experienceRef}
+        className="py-20 px-6 md:px-32 bg-slate-900 text-white border-b border-slate-800"
+      >
+        <div className="max-w-5xl mx-auto">
+
+          <h2 className="text-3xl font-bold mb-12 text-center border-b-2 border-blue-500 inline-block pb-2 tracking-wide mx-auto table uppercase">
+            EXPERIENCE
+          </h2>
+
+          <div className="bg-slate-800 p-8 md:p-10 rounded-2xl border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-2 group">
+
+            {/* EXPERIENCE HEADER */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+
+              <div className="flex items-center gap-4">
+
+                <div className="w-14 h-14 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:bg-blue-500/20 transition-all">
+                  <FontAwesomeIcon icon={faBriefcase} size="lg" />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                    Web Development Intern
+                  </h3>
+
+                  <p className="text-slate-400 text-sm mt-1">
+                    MJD Healthcare
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="text-left md:text-right">
+                <p className="text-blue-400 font-semibold text-sm">
+                  3 Months
+                </p>
+
+                <p className="text-slate-500 text-sm">
+                  Internship
+                </p>
+              </div>
+
+            </div>
+
+
+            {/* EXPERIENCE DESCRIPTION */}
+            <div className="space-y-4 text-slate-300 leading-relaxed text-sm md:text-base">
+
+              <p>
+                Worked as a{" "}
+                <strong className="text-white">
+                  Web Development Intern
+                </strong>{" "}
+                at MJD Healthcare, taking ownership of the company's website
+                development process from{" "}
+                <strong className="text-white">
+                  design to development and deployment
+                </strong>.
+              </p>
+
+              <p>
+                Designed and developed the website{" "}
+                <strong className="text-white">
+                  end-to-end without handholding
+                </strong>
+                , independently working on the structure, UI, responsive
+                design, development, and final deployment.
+              </p>
+
+              <p>
+                Created and redesigned{" "}
+                <strong className="text-white">
+                  5 different website prototypes
+                </strong>{" "}
+                to explore different design directions and improve the
+                overall visual and user experience of the website.
+              </p>
+
+              <p>
+                Worked primarily with{" "}
+                <strong className="text-white">
+                  React, Tailwind CSS, and Next.js
+                </strong>{" "}
+                to build modern, responsive, and production-ready web
+                experiences.
+              </p>
+
+            </div>
+
+
+            {/* TECHNOLOGIES */}
+            <div className="flex flex-wrap gap-3 mt-8">
+
+              <span className="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-cyan-400 text-sm font-medium">
+                React
+              </span>
+
+              <span className="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-cyan-300 text-sm font-medium">
+                Tailwind CSS
+              </span>
+
+              <span className="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-white text-sm font-medium">
+                Next.js
+              </span>
+
+            </div>
+
+
+            {/* WEBSITE PREVIEW */}
+            <div className="mt-10">
+
+              <div className="flex items-center justify-between mb-4">
+
+                <h4 className="text-lg font-bold text-white">
+                  Website Project
+                </h4>
+
+                <a
+                  href="https://www.mjdhealthcare.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 font-semibold text-sm hover:text-blue-300 transition-colors"
+                >
+                  View Live Website →
+                </a>
+
+              </div>
+
+
+              <a
+                href="https://www.mjdhealthcare.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block overflow-hidden rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 group/image"
+              >
+
+                <img
+                  src="https://res.cloudinary.com/lukfvxqr/image/upload/v1791277587/Screenshot_2026-10-06_143552.png"
+                  alt="MJD Healthcare website project"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover/image:scale-105"
+                />
+
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
       {/* ================= SKILLS SECTION ================= */}
-      <section ref={skillsRef} className="py-20 bg-slate-950 text-white px-6">
+      <section
+        ref={skillsRef}
+        className="py-20 bg-slate-950 text-white px-6"
+      >
         <div className="max-w-5xl mx-auto text-center">
+
           <h2 className="text-3xl font-bold mb-12 border-b-2 border-blue-500 inline-block pb-2 tracking-wide">
             TECHNICAL SKILLS
           </h2>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+
             {[
-              { name: 'Next.js', icon: faN, color: 'text-white' },
-              { name: 'React', icon: faReact, color: 'text-cyan-400' },
-              { name: 'TypeScript', icon: faCode, color: 'text-blue-400' },
-              { name: 'JavaScript', icon: faJsSquare, color: 'text-yellow-400' },
-              { name: 'Tailwind', icon: faWind, color: 'text-cyan-300' },
-              { name: 'Node.js', icon: faNodeJs, color: 'text-green-500' },
-              { name: 'MongoDB', icon: faDatabase, color: 'text-green-400' },
-              { name: 'Express', icon: faServer, color: 'text-gray-400' },
-              { name: 'GSAP', icon: faBolt, color: 'text-green-300' },
-              { name: 'GitHub', icon: faGithub, color: 'text-white' },
-              { name: 'Git', icon: faGitAlt, color: 'text-red-500' },
+              {
+                name: "Next.js",
+                icon: faN,
+                color: "text-white",
+              },
+              {
+                name: "React",
+                icon: faReact,
+                color: "text-cyan-400",
+              },
+              {
+                name: "TypeScript",
+                icon: faCode,
+                color: "text-blue-400",
+              },
+              {
+                name: "JavaScript",
+                icon: faJsSquare,
+                color: "text-yellow-400",
+              },
+              {
+                name: "Tailwind",
+                icon: faWind,
+                color: "text-cyan-300",
+              },
+              {
+                name: "Node.js",
+                icon: faNodeJs,
+                color: "text-green-500",
+              },
+              {
+                name: "MongoDB",
+                icon: faDatabase,
+                color: "text-green-400",
+              },
+              {
+                name: "Express",
+                icon: faServer,
+                color: "text-gray-400",
+              },
+              {
+                name: "GSAP",
+                icon: faBolt,
+                color: "text-green-300",
+              },
+              {
+                name: "GitHub",
+                icon: faGithub,
+                color: "text-white",
+              },
+              {
+                name: "Git",
+                icon: faGitAlt,
+                color: "text-red-500",
+              },
             ].map((skill, index) => (
+
               <div
                 key={index}
                 ref={addToRefs}
@@ -192,31 +463,50 @@ const About = () => {
                            hover:border-blue-400 
                            hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]"
               >
-                <div className={`text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${skill.color}`}>
-                   <FontAwesomeIcon icon={skill.icon} />
+
+                <div
+                  className={`text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${skill.color}`}
+                >
+                  <FontAwesomeIcon icon={skill.icon} />
                 </div>
+
                 <span className="text-xl font-semibold text-slate-300 group-hover:text-white tracking-wide">
                   {skill.name}
                 </span>
+
               </div>
+
             ))}
+
           </div>
         </div>
       </section>
 
+
       {/* ================= CONTACT CTA SECTION ================= */}
-      <section ref={contactRef} className="py-24 bg-slate-900 text-center text-white border-t border-slate-800">
-        <h2 className="text-4xl font-bold mb-8">Get in Touch</h2>
+      <section
+        ref={contactRef}
+        className="py-24 bg-slate-900 text-center text-white border-t border-slate-800"
+      >
+
+        <h2 className="text-4xl font-bold mb-8">
+          Get in Touch
+        </h2>
+
         <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-          Feel free to reach out if you want to collaborate on a project or just say hi!
+          Feel free to reach out if you want to collaborate on a project or
+          just say hi!
         </p>
-        <Link 
-            to="/contact" 
-            className="border-2 border-blue-600 px-10 py-4 rounded-full text-lg text-blue-400 font-bold hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] transition-all duration-300 inline-block"
+
+        <Link
+          to="/contact"
+          className="border-2 border-blue-600 px-10 py-4 rounded-full text-lg text-blue-400 font-bold hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] transition-all duration-300 inline-block"
         >
           Contact Me
         </Link>
+
       </section>
+
     </div>
   );
 };
