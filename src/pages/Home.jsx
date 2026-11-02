@@ -1,140 +1,78 @@
-
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import image from "../assets/profile.jpg";
 import About from "./About";
-import Work from "./work";
+import Work from "./work"; 
 import Contact from "./Contact";
-import "./Home.css";
-
-const portraitUrl =
-  "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261031_040619_2f6f349e-a4a7-40db-8e9b-03b6acd8b99a.png&w=1024&q=92";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (delay) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      delay,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  }),
-};
 
 const Home = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-text", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+      gsap.from(".hero-img", {
+        x: 50,
+        opacity: 0,
+        duration: 1.2,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <main className="portfolio-wrapper">
-
-      {/* HERO */}
-      <section className="hero-section" id="home">
-
-        {/* NAVBAR */}
-        <motion.nav
-          className="hero-navbar"
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={0}
-        >
-          <a href="#about">About</a>
-          <a href="#price">Price</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </motion.nav>
-
-        {/* HUGE HEADING */}
-        <div className="hero-heading-wrap">
-          <motion.h1
-            className="hero-heading"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={0.15}
-          >
-            Hi, i'm Kiran
-          </motion.h1>
+    <div>
+    <section
+      ref={heroRef}
+      className="min-h-[90vh] flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 py-10 bg-gray-900"
+    >
+      {/* Left: Text */}
+      <div className="w-full md:w-1/2 flex flex-col gap-4 text-center md:text-left mt-10 md:mt-0">
+        <div className="hero-text text-xl md:text-2xl font-light text-gray-400">
+          Hello, I am
         </div>
-
-        {/* CENTER PORTRAIT */}
-        <motion.div
-          className="hero-portrait-wrap"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          id="magnetWrap"
-        >
-          <div className="hero-portrait-inner">
-
-            <img
-              id="faceFallback"
-              src={portraitUrl}
-              alt="Kiran's interactive portrait"
-              draggable="false"
-            />
-
-            <canvas id="faceGl" aria-hidden="true" />
-
-            <div id="faceProps" aria-hidden="true">
-              <svg id="faceFly" viewBox="0 0 32 32">
-                <path className="wing"
-                  d="M15 15C12 9.5 4.5 8.5 2 13c2.5 4.5 10 4.5 13 2z"
-                />
-                <path className="wing r"
-                  d="M17 15c3-5.5 10.5-6.5 13-2-2.5 4.5-10 4.5-13 2z"
-                />
-                <ellipse cx="16" cy="19.5" rx="4" ry="6.5" />
-                <circle cx="16" cy="11.5" r="3.3" />
-              </svg>
-            </div>
-
-          </div>
-        </motion.div>
-
-        {/* BOTTOM CONTENT */}
-        <div className="hero-bottom">
-
-          <motion.p
-            className="hero-description"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={0.35}
+        <h1 className="hero-text text-4xl md:text-6xl font-bold leading-tight text-gray-100">
+          Kiran <br />{" "}
+          <span className="text-blue-500"> MERN Stack & AI Developer </span>
+        </h1>
+        <p className="hero-text text-gray-300 max-w-md mx-auto md:mx-0">
+           I build full-stack AI-powered web applications using MongoDB, Express, React, and Node.js. 
+            Passionate about creating smart, scalable, and user-friendly digital products that solve real-world problems. 
+        </p>
+        <div className="hero-text mt-6">
+          <a
+            href="/Black and White Corporate Resume_20260301_205651_0000.pdf"
+            download="Kiran_Resume.pdf"
+            className="inline-block border-2 border-blue-500 text-blue-500 px-8 py-3 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
           >
-            MERN STACK & AI DEVELOPER
-            <br /><br />
-            Building intelligent digital experiences
-            through modern web technologies and AI.
-          </motion.p>
-
-          <motion.a
-            href="#contact"
-            className="contact-button"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={0.5}
-          >
-            Contact Me
-          </motion.a>
-
+            DOWNLOAD RESUME
+          </a>
         </div>
-      </section>
-
-      {/* EXISTING SECTIONS */}
-      <div id="about">
-        <About />
       </div>
 
-      <div id="projects">
-        <Work />
+      {/* Right: Circle Image */}
+      <div className="w-full md:w-1/2 flex justify-center">
+        <div className="hero-img w-64 h-64 md:w-96 md:h-96 bg-gray-800 rounded-full overflow-hidden shadow-2xl border-4 border-gray-700">
+          <img
+            src={image}
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
-
-      <div id="contact">
-        <Contact />
+    </section>
+       <About />
+      <Work />
+      <Contact />
       </div>
-
-    </main>
   );
 };
 
